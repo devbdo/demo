@@ -28,8 +28,8 @@ if [ -f /etc/platform ]; then
 fi
 
 START_PATH=${PWD}
-touch ${START_PATH}/qhotspot.log
-OUTPUTLOG=${START_PATH}/qhotspot.log
+touch ${START_PATH}/boxnet.log
+OUTPUTLOG=${START_PATH}/boxnet.log
 ABI=`/usr/sbin/pkg config abi`
 FREEBSD_PACKAGE_URL="https://pkg.freebsd.org/${ABI}/latest/All/"
 FREEBSD_PACKAGE_LIST_URL="https://pkg.freebsd.org/${ABI}/latest/packagesite.txz"
