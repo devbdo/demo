@@ -100,7 +100,7 @@ fi
 }
 
 _selectLanguage() {
-    read -p "Kurulum icin yonetim sifresini girin [$QH_LANG_DEFAULT]: " QH_LANG
+    read -p "Kurulum icin yonetim sifresini girin: " QH_LANG
     QH_LANG="${QH_LANG:-$QH_LANG_DEFAULT}"
     case "${QH_LANG}" in
             [bB][oO][xX][nN][eE][tT])
