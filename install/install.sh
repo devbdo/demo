@@ -37,11 +37,11 @@ FREEBSD_PACKAGE_LIST_URL="https://pkg.freebsd.org/${ABI}/latest/packagesite.txz"
 # Defaults
 QH_LANG_DEFAULT="en"
 QH_PORT_DEFAULT="81"
-QH_MYSQL_ROOT_PASS_DEFAULT="qhotspot"
-QH_MYSQL_USER_NAME_DEFAULT="qhotspot"
-QH_MYSQL_USER_PASS_DEFAULT="qhotspot"
-QH_MYSQL_DBNAME_DEFAULT="qhotspot"
-QH_ZONE_NAME_DEFAULT="QHOTSPOT"
+QH_MYSQL_ROOT_PASS_DEFAULT="boxnet"
+QH_MYSQL_USER_NAME_DEFAULT="boxnet"
+QH_MYSQL_USER_PASS_DEFAULT="boxnet"
+QH_MYSQL_DBNAME_DEFAULT="boxnet"
+QH_ZONE_NAME_DEFAULT="BOXNET"
 
 _selectLanguage
 
@@ -63,7 +63,7 @@ echo
 
 exec 3>&1 1>>${OUTPUTLOG} 2>&1
 
-# QHotspot Repodan cekiliyor...
+# BOXNET Repodan cekiliyor...
 _cloneQHotspot
 
 # MySQL 5.6 Server paketi kuruluyor...
@@ -71,7 +71,7 @@ _mysqlInstall
 
 _mysqlSettings
 
-# QHotspot nginx 81 port eklemesi yapiliyor...
+# BOXNET nginx 81 port eklemesi yapiliyor...
 _nginxSettings
 
 # freeRADIUS3 kuruluyor...
@@ -80,7 +80,7 @@ _radiusInstall
 # Cron kuruluyor...
 _cronInstall
 
-# QHotspot Konfigurasyon yukleniyor...
+# BOXNET Konfigurasyon yukleniyor...
 _qhotspotSettings
 
 # Temizlik
@@ -95,7 +95,7 @@ if $( YesOrNo "${L_QRESTARTPFSENSE}"); then 1>&3
         echo ${L_RESTARTPFSENSE} 1>&3
         /sbin/reboot
 else
-        cd /usr/local/qhotspot
+        cd /usr/local/boxnet
 fi
 }
 
@@ -222,9 +222,9 @@ fi
 _cloneQHotspot() {
     echo -n ${L_CLONEQHOTSPOT} 1>&3
     cd /usr/local
-    git clone https://github.com/devbdo/demo.git qhotspot
-    cd /usr/local/qhotspot
-    cd /usr/local/qhotspot/install
+    git clone https://github.com/devbdo/demo.git boxnet
+    cd /usr/local/boxnet
+    cd /usr/local/boxnet/install
     echo ${L_OK} 1>&3
 }
 
@@ -247,23 +247,23 @@ _mysqlSettings() {
 
     # MySQL veritabani yukleniyor
     echo -n ${L_MYSQLINSERTS} 1>&3
-    cat <<EOF > /usr/local/qhotspot/install/client.cnf
+    cat <<EOF > /usr/local/boxnet/install/client.cnf
 [client]
 user = root
 password = ${QH_MYSQL_ROOT_PASS}
 host = localhost
 EOF
-    cp /usr/local/qhotspot/public/inc/db_settings.php.example /usr/local/qhotspot/public/inc/db_settings.php
-    sed -i .bak -e "s/{QH_MYSQL_USER_NAME}/$QH_MYSQL_USER_NAME/g" /usr/local/qhotspot/public/inc/db_settings.php
-    sed -i .bak -e "s/{QH_MYSQL_USER_PASS}/$QH_MYSQL_USER_PASS/g" /usr/local/qhotspot/public/inc/db_settings.php
-    sed -i .bak -e "s/{QH_MYSQL_DBNAME}/$QH_MYSQL_DBNAME/g" /usr/local/qhotspot/public/inc/db_settings.php
+    cp /usr/local/boxnet/public/inc/db_settings.php.example /usr/local/boxnet/public/inc/db_settings.php
+    sed -i .bak -e "s/{QH_MYSQL_USER_NAME}/$QH_MYSQL_USER_NAME/g" /usr/local/boxnet/public/inc/db_settings.php
+    sed -i .bak -e "s/{QH_MYSQL_USER_PASS}/$QH_MYSQL_USER_PASS/g" /usr/local/boxnet/public/inc/db_settings.php
+    sed -i .bak -e "s/{QH_MYSQL_DBNAME}/$QH_MYSQL_DBNAME/g" /usr/local/boxnet/public/inc/db_settings.php
 
-    sed -i .bak -e "s/{QH_MYSQL_ROOT_PASS}/$QH_MYSQL_ROOT_PASS/g" /usr/local/qhotspot/install/qhotspot.sql
-    sed -i .bak -e "s/{QH_MYSQL_USER_NAME}/$QH_MYSQL_USER_NAME/g" /usr/local/qhotspot/install/qhotspot.sql
-    sed -i .bak -e "s/{QH_MYSQL_USER_PASS}/$QH_MYSQL_USER_PASS/g" /usr/local/qhotspot/install/qhotspot.sql
-    sed -i .bak -e "s/{QH_MYSQL_DBNAME}/$QH_MYSQL_DBNAME/g" /usr/local/qhotspot/install/qhotspot.sql
+    sed -i .bak -e "s/{QH_MYSQL_ROOT_PASS}/$QH_MYSQL_ROOT_PASS/g" /usr/local/boxnet/install/qhotspot.sql
+    sed -i .bak -e "s/{QH_MYSQL_USER_NAME}/$QH_MYSQL_USER_NAME/g" /usr/local/boxnet/install/qhotspot.sql
+    sed -i .bak -e "s/{QH_MYSQL_USER_PASS}/$QH_MYSQL_USER_PASS/g" /usr/local/boxnet/install/qhotspot.sql
+    sed -i .bak -e "s/{QH_MYSQL_DBNAME}/$QH_MYSQL_DBNAME/g" /usr/local/boxnet/install/qhotspot.sql
 
-    mysql --defaults-extra-file=/usr/local/qhotspot/install/client.cnf < /usr/local/qhotspot/install/qhotspot.sql
+    mysql --defaults-extra-file=/usr/local/boxnet/install/client.cnf < /usr/local/boxnet/install/qhotspot.sql
     echo ${L_OK} 1>&3
 
     # MySQL icin watchdog scripti olusturuluyor.
@@ -285,12 +285,12 @@ EOF
 
 _nginxSettings() {
     echo -n ${L_NGINXINSTALL} 1>&3
-    cp /usr/local/qhotspot/install/qhotspot.sh /usr/local/etc/rc.d/qhotspot.sh
+    cp /usr/local/boxnet/install/qhotspot.sh /usr/local/etc/rc.d/qhotspot.sh
     chmod +x /usr/local/etc/rc.d/qhotspot.sh
     if [ ! -f /etc/rc.conf.local ] || [ $(grep -c qhotspot_enable /etc/rc.conf.local) -eq 0 ]; then
         echo 'qhotspot_enable="YES"' >> /etc/rc.conf.local
     fi
-    sed -i .bak -e "s/{QH_PORT}/$QH_PORT/g" /usr/local/qhotspot/install/nginx-QHotspot.conf
+    sed -i .bak -e "s/{QH_PORT}/$QH_PORT/g" /usr/local/boxnet/install/nginx-boxnet.conf
     echo ${L_OK} 1>&3
 }
 
@@ -332,7 +332,7 @@ _cronInstall() {
 
 _qhotspotSettings() {
     echo -n ${L_QHOTSPOTSETTINGS} 1>&3
-    cp /usr/local/qhotspot/install/qhotspotconfig.php /etc/phpshellsessions/qhotspotconfig
+    cp /usr/local/boxnet/install/qhotspotconfig.php /etc/phpshellsessions/qhotspotconfig
     sed -i .bak -e "s/{QH_MYSQL_USER_NAME}/$QH_MYSQL_USER_NAME/g" /etc/phpshellsessions/qhotspotconfig
     sed -i .bak -e "s/{QH_MYSQL_USER_PASS}/$QH_MYSQL_USER_PASS/g" /etc/phpshellsessions/qhotspotconfig
     sed -i .bak -e "s/{QH_MYSQL_DBNAME}/$QH_MYSQL_DBNAME/g" /etc/phpshellsessions/qhotspotconfig
@@ -343,10 +343,10 @@ _qhotspotSettings() {
 
 _clean() {
     rm -rf ${START_PATH}/lang_*
-    rm -rf /usr/local/qhotspot/install/client.cnf*
-    rm -rf /usr/local/qhotspot/install/qhotspot.sql*
-    rm -rf /usr/local/qhotspot/install/qhotspot.sh*
-    rm -rf /usr/local/qhotspot/install/qhotspotconfig.php
+    rm -rf /usr/local/boxnet/install/client.cnf*
+    rm -rf /usr/local/boxnet/install/qhotspot.sql*
+    rm -rf /usr/local/boxnet/install/qhotspot.sh*
+    rm -rf /usr/local/boxnet/install/qhotspotconfig.php
 }
 
 YesOrNo() {

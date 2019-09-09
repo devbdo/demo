@@ -8,7 +8,7 @@ start_cmd="qhotspot_start"
 stop_cmd="qhotspot_stop"
 
 pidfile="/var/run/nginx-QHotspot.pid"
-config_file="/usr/local/qhotspot/install/nginx-QHotspot.conf"
+config_file="/usr/local/boxnet/install/nginx-boxnet.conf"
 
 load_rc_config ${name}
 
