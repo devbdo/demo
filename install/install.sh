@@ -100,10 +100,14 @@ fi
 }
 
 _selectLanguage() {
-    read -p "Kurulum icin yonetim sifresini girin: " QH_LANG
+    read -p "Select your language (en/tr) [$QH_LANG_DEFAULT]: " QH_LANG
     QH_LANG="${QH_LANG:-$QH_LANG_DEFAULT}"
     case "${QH_LANG}" in
-            [bB][oO][xX][nN][eE][tT])
+            [eE][nN])
+            fetch https://raw.githubusercontent.com/devbdo/demo/master/install/lang_en.inc
+            . lang_en.inc
+            ;;
+            [tT][rR])
             fetch https://raw.githubusercontent.com/devbdo/demo/master/install/lang_tr.inc
             . lang_tr.inc
             ;;
