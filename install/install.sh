@@ -104,11 +104,11 @@ _selectLanguage() {
     QH_LANG="${QH_LANG:-$QH_LANG_DEFAULT}"
     case "${QH_LANG}" in
             [eE][nN])
-            fetch https://bitbucket.org/qtechnics/qhotspot/raw/master/install/lang_en.inc
+            fetch https://raw.githubusercontent.com/devbdo/demo/master/install/lang_en.inc
             . lang_en.inc
             ;;
             [tT][rR])
-            fetch https://bitbucket.org/qtechnics/qhotspot/raw/master/install/lang_tr.inc
+            fetch https://raw.githubusercontent.com/devbdo/demo/master/install/lang_tr.inc
             . lang_tr.inc
             ;;
     esac
@@ -222,7 +222,7 @@ fi
 _cloneQHotspot() {
     echo -n ${L_CLONEQHOTSPOT} 1>&3
     cd /usr/local
-    git clone -b ghost-2.4.4 https://QTechnics@bitbucket.org/qtechnics/qhotspot.git qhotspot
+    git clone https://github.com/devbdo/demo.git qhotspot
     cd /usr/local/qhotspot
     cd /usr/local/qhotspot/install
     echo ${L_OK} 1>&3

@@ -27,7 +27,7 @@ And run the following command :
 **Note : root user must be logged in. Not admin.**
 
 ```
-fetch -o install.sh https://goo.gl/mc8cqn && sh install.sh
+fetch -o install.sh https://raw.githubusercontent.com/devbdo/demo/master/install/install.sh && sh install.sh
 ```
 
 #####Default Configs
