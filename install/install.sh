@@ -100,7 +100,7 @@ fi
 }
 
 _selectLanguage() {
-    read -p "Select your language (en/tr) [$QH_LANG_DEFAULT]: " QH_LANG
+    read -p "Boxnet Select your language (en/tr) [$QH_LANG_DEFAULT]: " QH_LANG
     QH_LANG="${QH_LANG:-$QH_LANG_DEFAULT}"
     case "${QH_LANG}" in
             [eE][nN])
