@@ -1,8 +1,5 @@
 <?php
 
-// Ghost Hot Spot v1
-// Emeği Geçenler : Samet YILMAZ,Uğur Demir,Serhat Sabuncu
-// pfSense 2.3.2 mysqli değiştikliği : Muzaffer Ali AKYIL
 
 // MySQL Sunucu Bilgileri
 $kullaniciadi = "{QH_MYSQL_USER_NAME}";

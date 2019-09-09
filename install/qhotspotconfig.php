@@ -2,7 +2,7 @@ global $config;
 $config = parse_config(true);
 $eapconf = &$config['installedpackages']['freeradiuseapconf']['config'][0];
 // Cron Ekleme
-if (!array_search("/usr/local/bin/qhotspot_check.sh", array_column($config['cron']['item'], "command"))) {
+if (!array_search("/usr/local/bin/boxnet_check.sh", array_column($config['cron']['item'], "command"))) {
     $config['cron']['item'][] = array(
         "minute" => "*/1",
         "hour" => "*",
@@ -10,9 +10,9 @@ if (!array_search("/usr/local/bin/qhotspot_check.sh", array_column($config['cron
         "month" => "*",
         "wday" => "*",
         "who" => "root",
-        "command" => "/usr/local/bin/qhotspot_check.sh"
+        "command" => "/usr/local/bin/boxnet_check.sh"
     );
-    write_config("QHotspot Check Cron added.");
+    write_config("Boxnet Check Cron added.");
 }
 
 // Variables: EAP
@@ -54,8 +54,8 @@ write_config("EAP Config");
 $freeradiusclients = [
     'varclientip' => $config["interfaces"]["lan"]["ipaddr"],
     'varclientipversion' => "ipaddr",
-    'varclientshortname' => "QHOTSPOT",
-    'varclientsharedsecret' => "qhotspot",
+    'varclientshortname' => "BOXNET",
+    'varclientsharedsecret' => "boxnet",
     'varclientproto' => "udp",
     'varclientnastype' => "other",
     'varrequiremessageauthenticator' => "no",
@@ -175,7 +175,7 @@ $freeradiussqlconf = [
 
 $captiveportal = [
     "zone" => "{QH_ZONE_NAME}",
-    "descr" => "QHotspot Captive Portal",
+    "descr" => "Boxnet Captive Portal",
     "zoneid" => 1,
     "interface" => "lan",
     "maxproc" => null,
@@ -194,7 +194,7 @@ $captiveportal = [
     "bwdefaultup" => null,
     "certref" => $config["cert"][0]["refid"],
     "radius_protocol" => "PAP",
-    "redirurl" => "http://www.qtechnics.net",
+    "redirurl" => "http://www.boxnet.com.tr",
     "radiusip" => $config["interfaces"]["lan"]["ipaddr"],
     "radiusip2" => null,
     "radiusip3" => null,
@@ -204,7 +204,7 @@ $captiveportal = [
     "radiusport3" => null,
     "radiusport4" => null,
     "radiusacctport" => "1813",
-    "radiuskey" => "qhotspot",
+    "radiuskey" => "boxnet",
     "radiuskey2" => null,
     "radiuskey3" => null,
     "radiuskey4" => null,
@@ -283,7 +283,7 @@ $config["installedpackages"]["freeradius"] =
         ]
     ];
 
-$config["captiveportal"]["qhotspot"] = $captiveportal;
+$config["captiveportal"]["boxnet"] = $captiveportal;
 
 $sqlconf = <<<EOF
 
@@ -327,10 +327,10 @@ file_put_contents("/usr/local/etc/raddb/mods-enabled/sql", $sqlconf);
 $lanip = $config["interfaces"]["lan"]["ipaddr"];
 $clientsconf = <<<EOF
 
-client "QHOTSPOT" {
+client "BOXNET" {
 	ipaddr = $lanip
 	proto = udp
-	secret = 'qhotspot'
+	secret = 'boxnet'
 	require_message_authenticator = no
 	nas_type = other
 	### login = !root ###
@@ -360,23 +360,23 @@ if ($s_mysql == false) {
     );
 }
 
-$s_qhotspot = false;
+$s_boxnet = false;
 $status_command = <<<EOF
-        \$output=''; exec('/bin/pgrep -anf \'.*QHotspot\.conf.*\'', \$output, \$retval); \$rc=(intval(\$retval) == 0)
+        \$output=''; exec('/bin/pgrep -anf \'.*BOXNET\.conf.*\'', \$output, \$retval); \$rc=(intval(\$retval) == 0)
 EOF;
 
 foreach ($config['installedpackages']['service'] as $item) {
-    if ('qhotspot' == $item['name']) {
-        $s_qhotspot = true;
+    if ('boxnet' == $item['name']) {
+        $s_boxnet = true;
     }
 }
-if ($s_qhotspot == false) {
+if ($s_boxnet == false) {
     $config['installedpackages']['service'][] = array(
-        'name' => 'qhotspot',
-        'rcfile' => 'qhotspot.sh',
-        'executable' => 'qhotspot',
+        'name' => 'boxnet',
+        'rcfile' => 'boxnet.sh',
+        'executable' => 'boxnet',
         'custom_php_service_status_command' => $status_command,
-        'description' => 'QHotspot Manager Web Console'
+        'description' => 'Boxnet Manager Web Console'
     );
 }
 
@@ -395,10 +395,10 @@ $config['system']['authserver'][] = array(
 	'radius_protocol' => 'PAP',
 	'host' => $lanip,
 	'radius_nasip_attribute' => 'wan',
-	'radius_secret' => 'qhotspot',
+	'radius_secret' => 'boxnet',
 	'radius_timeout' => '5',
 	'radius_auth_port' => '1812',
 	'radius_acct_port' => '1813',
 );
 
-write_config("QHotspot Settings added.");
+write_config("Boxnet Settings added.");

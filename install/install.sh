@@ -258,17 +258,17 @@ EOF
     sed -i .bak -e "s/{QH_MYSQL_USER_PASS}/$QH_MYSQL_USER_PASS/g" /usr/local/boxnet/public/inc/db_settings.php
     sed -i .bak -e "s/{QH_MYSQL_DBNAME}/$QH_MYSQL_DBNAME/g" /usr/local/boxnet/public/inc/db_settings.php
 
-    sed -i .bak -e "s/{QH_MYSQL_ROOT_PASS}/$QH_MYSQL_ROOT_PASS/g" /usr/local/boxnet/install/qhotspot.sql
-    sed -i .bak -e "s/{QH_MYSQL_USER_NAME}/$QH_MYSQL_USER_NAME/g" /usr/local/boxnet/install/qhotspot.sql
-    sed -i .bak -e "s/{QH_MYSQL_USER_PASS}/$QH_MYSQL_USER_PASS/g" /usr/local/boxnet/install/qhotspot.sql
-    sed -i .bak -e "s/{QH_MYSQL_DBNAME}/$QH_MYSQL_DBNAME/g" /usr/local/boxnet/install/qhotspot.sql
+    sed -i .bak -e "s/{QH_MYSQL_ROOT_PASS}/$QH_MYSQL_ROOT_PASS/g" /usr/local/boxnet/install/boxnet.sql
+    sed -i .bak -e "s/{QH_MYSQL_USER_NAME}/$QH_MYSQL_USER_NAME/g" /usr/local/boxnet/install/boxnet.sql
+    sed -i .bak -e "s/{QH_MYSQL_USER_PASS}/$QH_MYSQL_USER_PASS/g" /usr/local/boxnet/install/boxnet.sql
+    sed -i .bak -e "s/{QH_MYSQL_DBNAME}/$QH_MYSQL_DBNAME/g" /usr/local/boxnet/install/boxnet.sql
 
-    mysql --defaults-extra-file=/usr/local/boxnet/install/client.cnf < /usr/local/boxnet/install/qhotspot.sql
+    mysql --defaults-extra-file=/usr/local/boxnet/install/client.cnf < /usr/local/boxnet/install/boxnet.sql
     echo ${L_OK} 1>&3
 
     # MySQL icin watchdog scripti olusturuluyor.
     echo -n ${L_MYSQLWATCHDOG} 1>&3
-    cat <<EOF > /usr/local/bin/qhotspot_check.sh
+    cat <<EOF > /usr/local/bin/boxnet_check.sh
 #!/usr/bin/env sh
 service mysql-server.sh status
 if [ \$? != 0 ]; then
@@ -279,16 +279,16 @@ if ! [ -f /var/run/radiusd.pid ]; then
 service radiusd onestart
 fi
 EOF
-    chmod +x /usr/local/bin/qhotspot_check.sh
+    chmod +x /usr/local/bin/boxnet_check.sh
     echo ${L_OK} 1>&3
 }
 
 _nginxSettings() {
     echo -n ${L_NGINXINSTALL} 1>&3
-    cp /usr/local/boxnet/install/qhotspot.sh /usr/local/etc/rc.d/qhotspot.sh
-    chmod +x /usr/local/etc/rc.d/qhotspot.sh
-    if [ ! -f /etc/rc.conf.local ] || [ $(grep -c qhotspot_enable /etc/rc.conf.local) -eq 0 ]; then
-        echo 'qhotspot_enable="YES"' >> /etc/rc.conf.local
+    cp /usr/local/boxnet/install/boxnet.sh /usr/local/etc/rc.d/boxnet.sh
+    chmod +x /usr/local/etc/rc.d/boxnet.sh
+    if [ ! -f /etc/rc.conf.local ] || [ $(grep -c boxnet_enable /etc/rc.conf.local) -eq 0 ]; then
+        echo 'boxnet_enable="YES"' >> /etc/rc.conf.local
     fi
     sed -i .bak -e "s/{QH_PORT}/$QH_PORT/g" /usr/local/boxnet/install/nginx-boxnet.conf
     echo ${L_OK} 1>&3
@@ -344,8 +344,8 @@ _qhotspotSettings() {
 _clean() {
     rm -rf ${START_PATH}/lang_*
     rm -rf /usr/local/boxnet/install/client.cnf*
-    rm -rf /usr/local/boxnet/install/qhotspot.sql*
-    rm -rf /usr/local/boxnet/install/qhotspot.sh*
+    rm -rf /usr/local/boxnet/install/boxnet.sql*
+    rm -rf /usr/local/boxnet/install/boxnet.sh*
     rm -rf /usr/local/boxnet/install/qhotspotconfig.php
 }
 

@@ -2,33 +2,33 @@
 
 . /etc/rc.subr
 
-name="qhotspot"
-rcvar="qhotspot_enable"
-start_cmd="qhotspot_start"
-stop_cmd="qhotspot_stop"
+name="boxnet"
+rcvar="boxnet_enable"
+start_cmd="boxnet_start"
+stop_cmd="boxnet_stop"
 
-pidfile="/var/run/nginx-QHotspot.pid"
+pidfile="/var/run/nginx-boxnet.pid"
 config_file="/usr/local/boxnet/install/nginx-boxnet.conf"
 
 load_rc_config ${name}
 
-qhotspot_start()
+boxnet_start()
 {
 if checkyesno ${rcvar}; then
     if [ -f $pidfile ]; then
-        echo "QHotspot already running."
-        qhotspot_stop
+        echo "boxnet already running."
+        boxnet_stop
     fi
-    echo -n "Qhotspot starting..."
+    echo -n "boxnet starting..."
     /usr/local/sbin/nginx -c ${config_file}
     echo " Done."
 fi
 }
 
-qhotspot_stop()
+boxnet_stop()
 {
 if [ -f $pidfile ]; then
-        echo -n "QHotspot stopping."
+        echo -n "boxnet stopping."
         pkill -F $pidfile
         while [ `pgrep -F $pidfile` ]; do
             echo -n "."
