@@ -20,7 +20,6 @@ SET FOREIGN_KEY_CHECKS=0;
 
 USE {QH_MYSQL_DBNAME};
 
-
 -- tablo yapısı dökülüyor boxnet.cui
 CREATE TABLE IF NOT EXISTS `cui` (
   `clientipaddress` varchar(15) NOT NULL DEFAULT '',
@@ -101,7 +100,11 @@ CREATE TABLE IF NOT EXISTS `radacct` (
   KEY `calledstationid` (`calledstationid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
+-- Dumping data for table net_yonetim.radacct: ~0 rows (yaklaşık)
+/*!40000 ALTER TABLE `radacct` DISABLE KEYS */;
+INSERT INTO `radacct` (`radacctid`, `acctsessionid`, `acctuniqueid`, `username`, `groupname`, `realm`, `nasipaddress`, `nasportid`, `nasporttype`, `acctstarttime`, `acctstoptime`, `acctsessiontime`, `acctauthentic`, `connectinfo_start`, `connectinfo_stop`, `acctinputoctets`, `acctoutputoctets`, `calledstationid`, `callingstationid`, `acctterminatecause`, `servicetype`, `framedprotocol`, `framedipaddress`, `acctstartdelay`, `acctstopdelay`, `xascendsessionsvrkey`) VALUES
+	(4, 'e2f9d84bd2e66ee6', 'cc0f437f9c60da42', 'demo', '', '', '172.16.10.1', '2140', 'Ethernet', '2015-07-04 19:04:45', '2015-07-04 19:05:19', 34, 'RADIUS', '', '', 0, 0, '172.16.10.1', '00:30:67:37:45:10', 'User-Request', '', '', '172.16.10.10', 0, 0, '');
+/*!40000 ALTER TABLE `radacct` ENABLE KEYS */;
 
 -- tablo yapısı dökülüyor boxnet.radcheck
 CREATE TABLE IF NOT EXISTS `radcheck` (
@@ -420,22 +423,6 @@ INSERT INTO `tbl_kullanici` (`KullaniciID`, `AdSoyad`, `Telefon`, `Mail`, `Kulla
 	(7, 'Boxnet Standart', '0 216 970 06 44', 'info@simyacibilisim.com', 'boxnet', 'B0xn3t', '2014-10-17 01:09:05');
 /*!40000 ALTER TABLE `tbl_kullanici` ENABLE KEYS */;
 
--- tablo yapısı dökülüyor boxnet.tbl_kullanici_yetki
-CREATE TABLE IF NOT EXISTS `tbl_kullanici_yetki` (
-  `KullaniciID` int(11) DEFAULT NULL,
-  `Yetki` varchar(50) COLLATE utf8_bin DEFAULT NULL,
-  `Yeni` bit(1) DEFAULT NULL,
-  `Duzenle` bit(1) DEFAULT NULL,
-  `Sil` bit(1) DEFAULT NULL,
-  UNIQUE KEY `KullaniciID_Yetki` (`KullaniciID`,`Yetki`),
-  KEY `KullaniciID` (`KullaniciID`),
-  KEY `Yetki` (`Yetki`),
-  CONSTRAINT `FK__tbl_kullanici` FOREIGN KEY (`KullaniciID`) REFERENCES `tbl_kullanici` (`KullaniciID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK__tbl_yetki` FOREIGN KEY (`Yetki`) REFERENCES `tbl_yetki` (`Yetki`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
-
-
 -- tablo yapısı dökülüyor boxnet.tbl_macban
 CREATE TABLE IF NOT EXISTS `tbl_macban` (
   `BanID` int(11) NOT NULL AUTO_INCREMENT,
@@ -740,6 +727,20 @@ INSERT INTO `tbl_yetki` (`Yetki`, `Aciklama`) VALUES
 	('sistem_yonetimi_yedekleme', 'sistem yonetimi > yedekleme'),
 	('sistem_yonetimi_sms_api', 'sistem yonetimi > sms api');
 /*!40000 ALTER TABLE `tbl_yetki` ENABLE KEYS */;
+
+-- tablo yapısı dökülüyor boxnet.tbl_kullanici_yetki
+CREATE TABLE IF NOT EXISTS `tbl_kullanici_yetki` (
+  `KullaniciID` int(11) DEFAULT NULL,
+  `Yetki` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `Yeni` bit(1) DEFAULT NULL,
+  `Duzenle` bit(1) DEFAULT NULL,
+  `Sil` bit(1) DEFAULT NULL,
+  UNIQUE KEY `KullaniciID_Yetki` (`KullaniciID`,`Yetki`),
+  KEY `KullaniciID` (`KullaniciID`),
+  KEY `Yetki` (`Yetki`),
+  CONSTRAINT `FK__tbl_kullanici` FOREIGN KEY (`KullaniciID`) REFERENCES `tbl_kullanici` (`KullaniciID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK__tbl_yetki` FOREIGN KEY (`Yetki`) REFERENCES `tbl_yetki` (`Yetki`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=UTF8_BIN;
 
 -- Dumping data for table boxnet.tbl_kullanici_yetki: ~34 rows (yaklaşık)
 /*!40000 ALTER TABLE `tbl_kullanici_yetki` DISABLE KEYS */;
