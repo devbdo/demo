@@ -90,18 +90,19 @@ CREATE TABLE IF NOT EXISTS `radacct` (
   `xascendsessionsvrkey` varchar(10) CHARACTER SET latin1 DEFAULT NULL,
 
   PRIMARY KEY (radacctid),
-  UNIQUE KEY acctuniqueid (acctuniqueid),
-  KEY username (username),
-  KEY framedipaddress (framedipaddress),
-  KEY acctsessionid (acctsessionid),
-  KEY acctsessiontime (acctsessiontime),
-  KEY acctuniqueid (acctuniqueid),
-  KEY acctinterval (acctinterval),
-  KEY acctstoptime (acctstoptime),
-  KEY acctstarttime (acctstarttime),
-  KEY nasipaddress (nasipaddress),
-  KEY callingstationid (callingstationid),
-  KEY calledstationid (calledstationid)
+  UNIQUE KEY 'acctuniqueid' ('acctuniqueid'),
+  KEY `username` (`username`),
+  KEY `framedipaddress` (`framedipaddress`),
+  KEY `acctsessionid` (`acctsessionid`),
+  KEY `acctsessiontime` (`acctsessiontime`),
+  KEY `acctuniqueid` (`acctuniqueid`),
+  KEY 'acctinterval' ('acctinterval'),
+  KEY `acctstoptime` (`acctstoptime`),
+  KEY `acctstarttime` (`acctstarttime`),
+  KEY `nasipaddress` (`nasipaddress`),
+  KEY `callingstationid` (`callingstationid`),
+  KEY `calledstationid` (`calledstationid`)
+
 ) ENGINE = INNODB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table net_yonetim.radacct: ~0 rows (yaklaşık)
