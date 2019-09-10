@@ -16,7 +16,7 @@ if [ ! -d $LogD ]
 	fi
 
 # Hatali imzalanan loglar dizini
-HataLogD=/usr/localboxnet/public/5651Logs/hatali
+HataLogD=/usr/local/boxnet/public/5651Logs/hatali
 if [ ! -d $HataLogD ]
 	then
 		mkdir $HataLogD
