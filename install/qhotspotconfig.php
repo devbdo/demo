@@ -12,6 +12,46 @@ if (!array_search("/usr/local/bin/boxnet_check.sh", array_column($config['cron']
         "who" => "root",
         "command" => "/usr/local/bin/boxnet_check.sh"
     );
+
+    $config['cron']['item'][] = array(
+        "minute" => "*/1",
+        "hour" => "*",
+        "mday" => "*",
+        "month" => "*",
+        "wday" => "*",
+        "who" => "root",
+        "command" => "/usr/local/bin/php /usr/local/boxnet/public/Runtime/netGrupCheck.php"
+    );
+
+    $config['cron']['item'][] = array(
+        "minute" => "*/1",
+        "hour" => "*",
+        "mday" => "*",
+        "month" => "*",
+        "wday" => "*",
+        "who" => "root",
+        "command" => "/usr/local/bin/php /usr/local/boxnet/public/Runtime/netCheck.php"
+    );
+
+    $config['cron']['item'][] = array(
+        "minute" => "*/5",
+        "hour" => "*",
+        "mday" => "*",
+        "month" => "*",
+        "wday" => "*",
+        "who" => "root",
+        "command" => "/usr/local/bin/php /usr/local/boxnet/public/Runtime/Entegre.php"
+    );
+    $config['cron']['item'][] = array(
+        "minute" => "59",
+        "hour" => "23",
+        "mday" => "*",
+        "month" => "*",
+        "wday" => "*",
+        "who" => "root",
+        "command" => " /sbin/5651Imzala.sh"
+    );
+
     write_config("Boxnet Check Cron added.");
 }
 
