@@ -105,11 +105,11 @@ _selectLanguage() {
     QH_LANG="${QH_LANG:-$QH_LANG_DEFAULT}"
     case "${QH_LANG}" in
             [eE][nN])
-            fetch https://raw.githubusercontent.com/devbdo/demo/master/install/lang_en.inc
+            fetch https://raw.githubusercontent.com/devbdo/demo/master/usr/local/boxnet/install/lang_en.inc
             . lang_en.inc
             ;;
             [tT][rR])
-            fetch https://raw.githubusercontent.com/devbdo/demo/master/install/lang_tr.inc
+            fetch https://raw.githubusercontent.com/devbdo/demo/master/usr/local/boxnet/install/lang_tr.inc
             . lang_tr.inc
             ;;
     esac
