@@ -1,26 +1,21 @@
+-- --------------------------------------------------------
+-- Sunucu:                       172.16.10.1
+-- Sunucu versiyonu:             5.5.21 - Source distribution
+-- Sunucu İşletim Sistemi:       FreeBSD8.1
+-- HeidiSQL Sürüm:               9.2.0.4947
+-- --------------------------------------------------------
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET NAMES utf8mb4 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
-UPDATE mysql.user SET Password=PASSWORD('{QH_MYSQL_ROOT_PASS}') WHERE User='root';
-DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
-DELETE FROM mysql.user WHERE User='';
-DELETE FROM mysql.db WHERE Db='test' OR Db='test\_%';
-CREATE DATABASE IF NOT EXISTS {QH_MYSQL_DBNAME} /*!40100 DEFAULT CHARACTER SET latin1 */;
-CREATE USER `{QH_MYSQL_USER_NAME}`@`localhost`;
-SET PASSWORD FOR `{QH_MYSQL_USER_NAME}`@`localhost` = PASSWORD('{QH_MYSQL_USER_PASS}');
-GRANT ALL ON {QH_MYSQL_DBNAME}.* TO `{QH_MYSQL_USER_NAME}`@`localhost` IDENTIFIED BY '{QH_MYSQL_USER_PASS}';
-GRANT ALL ON {QH_MYSQL_DBNAME}.* TO `{QH_MYSQL_USER_NAME}`@`%` IDENTIFIED BY '{QH_MYSQL_USER_PASS}';
+-- boxnet için veritabanı yapısı dökülüyor
+CREATE DATABASE IF NOT EXISTS `boxnet` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `boxnet`;
 
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-SET FOREIGN_KEY_CHECKS=0;
 
-USE {QH_MYSQL_DBNAME};
-
--- tablo yapısı dökülüyor net_yonetim.cui
+-- tablo yapısı dökülüyor boxnet.cui
 CREATE TABLE IF NOT EXISTS `cui` (
   `clientipaddress` varchar(15) NOT NULL DEFAULT '',
   `callingstationid` varchar(50) NOT NULL DEFAULT '',
@@ -31,12 +26,12 @@ CREATE TABLE IF NOT EXISTS `cui` (
   PRIMARY KEY (`username`,`clientipaddress`,`callingstationid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- Dumping data for table net_yonetim.cui: 0 rows
+-- Dumping data for table boxnet.cui: 0 rows
 /*!40000 ALTER TABLE `cui` DISABLE KEYS */;
 /*!40000 ALTER TABLE `cui` ENABLE KEYS */;
 
 
--- tablo yapısı dökülüyor net_yonetim.nas
+-- tablo yapısı dökülüyor boxnet.nas
 CREATE TABLE IF NOT EXISTS `nas` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `nasname` varchar(128) NOT NULL,
@@ -49,70 +44,67 @@ CREATE TABLE IF NOT EXISTS `nas` (
   `description` varchar(200) DEFAULT 'RADIUS Client',
   PRIMARY KEY (`id`),
   KEY `nasname` (`nasname`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table net_yonetim.nas: ~0 rows (yaklaşık)
+-- Dumping data for table boxnet.nas: ~0 rows (yaklaşık)
 /*!40000 ALTER TABLE `nas` DISABLE KEYS */;
 /*!40000 ALTER TABLE `nas` ENABLE KEYS */;
 
 
-
-
--- tablo yapısı dökülüyor net_yonetim.radacct
+-- tablo yapısı dökülüyor boxnet.radacct
 CREATE TABLE IF NOT EXISTS `radacct` (
-  `radacctid`  bigint(21) NOT NULL AUTO_INCREMENT,
-  `acctsessionid`  varchar(64) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `acctuniqueid`  varchar(32) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `username`  varchar(64) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `groupname`  varchar(64) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `realm`  varchar(64) CHARACTER SET latin1 DEFAULT '',
-  `nasipaddress`  varchar(15) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `nasportid`  varchar(15) CHARACTER SET latin1 DEFAULT NULL,
-  `nasporttype`  varchar(32) CHARACTER SET latin1 DEFAULT NULL,
-  `acctstarttime`  datetime DEFAULT NULL,
-  `acctupdatetime`  datetime NULL DEFAULT NULL,
-  `acctstoptime`   datetime DEFAULT NULL,
-  `acctinterval`  int(12) DEFAULT NULL,
-  `acctsessiontime`   int(12) DEFAULT NULL,
-  `acctauthentic`  varchar(32) CHARACTER SET latin1 DEFAULT NULL,
-  `connectinfo_start`  varchar(50) CHARACTER SET latin1 DEFAULT NULL,
-  `connectinfo_stop`  varchar(50) CHARACTER SET latin1 DEFAULT NULL,
-  `acctinputoctets`  bigint(20) DEFAULT NULL,
-  `acctoutputoctets`  bigint(20) DEFAULT NULL,
-  `calledstationid`  varchar(50) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `callingstationid`  varchar(50) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `acctterminatecause`  varchar(32) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `servicetype`  varchar(32) CHARACTER SET latin1 DEFAULT NULL,
-  `framedprotocol`  varchar(32) CHARACTER SET latin1 DEFAULT NULL,
-  `framedipaddress`  varchar(15) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `radacctid` radacctid bigint(21) NOT NULL AUTO_INCREMENT,
+  `acctsessionid` acctsessionid varchar(64) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `acctuniqueid` acctuniqueid varchar(32) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `username` username varchar(64) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `groupname` groupname varchar(64) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `realm`  realm varchar(64) CHARACTER SET latin1 DEFAULT '',
+  `nasipaddress` nasipaddress varchar(15) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `nasportid` nasportid varchar(15) CHARACTER SET latin1 DEFAULT NULL,
+  `nasporttype` nasporttype varchar(32) CHARACTER SET latin1 DEFAULT NULL,
+  `acctstarttime`  acctstarttime datetime DEFAULT NULL,
+  `acctupdatetime` acctupdatetime datetime NULL DEFAULT NULL,
+  `acctstoptime`   acctstoptime datetime DEFAULT NULL,
+  `acctinterval` acctinterval int(12) DEFAULT NULL,
+  `acctsessiontime` acctsessiontime int(12) DEFAULT NULL,
+  `acctauthentic` acctauthentic varchar(32) CHARACTER SET latin1 DEFAULT NULL,
+  `connectinfo_start` connectinfo_start varchar(50) CHARACTER SET latin1 DEFAULT NULL,
+  `connectinfo_stop` connectinfo_stop varchar(50) CHARACTER SET latin1 DEFAULT NULL,
+  `acctinputoctets` acctinputoctets  bigint(20) DEFAULT NULL,
+  `acctoutputoctets` acctoutputoctets bigint(20) DEFAULT NULL,
+  `calledstationid` calledstationid varchar(50) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `callingstationid` callingstationid varchar(50) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `acctterminatecause` acctterminatecause varchar(32) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `servicetype` servicetype varchar(32) CHARACTER SET latin1 DEFAULT NULL,
+  `framedprotocol` framedprotocol varchar(32) CHARACTER SET latin1 DEFAULT NULL,
+  `framedipaddress` framedipaddress  varchar(15) CHARACTER SET latin1 NOT NULL DEFAULT '',
   `acctstartdelay` int(12) DEFAULT NULL,
   `acctstopdelay` int(12) DEFAULT NULL,
   `xascendsessionsvrkey` varchar(10) CHARACTER SET latin1 DEFAULT NULL,
-
-  PRIMARY KEY (radacctid),
-  UNIQUE KEY 'acctuniqueid' ('acctuniqueid'),
+  PRIMARY KEY (`radacctid`),
+  UNIQUE KEY `acctuniqueid` (`acctuniqueid`),
   KEY `username` (`username`),
   KEY `framedipaddress` (`framedipaddress`),
   KEY `acctsessionid` (`acctsessionid`),
   KEY `acctsessiontime` (`acctsessiontime`),
-  KEY `acctuniqueid` (`acctuniqueid`),
-  KEY 'acctinterval' ('acctinterval'),
-  KEY `acctstoptime` (`acctstoptime`),
   KEY `acctstarttime` (`acctstarttime`),
+  KEY `acctinterval` (`acctinterval`),
+  KEY `acctuniqueid` (`acctuniqueid`),
+  KEY `acctstarttime` (`acctstarttime`),
+  KEY `acctstoptime` (`acctstoptime`),
   KEY `nasipaddress` (`nasipaddress`),
   KEY `callingstationid` (`callingstationid`),
   KEY `calledstationid` (`calledstationid`)
+) ENGINE=ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-) ENGINE = INNODB DEFAULT CHARSET=utf8;
-
--- Dumping data for table net_yonetim.radacct: ~0 rows (yaklaşık)
+-- Dumping data for table boxnet.radacct: ~0 rows (yaklaşık)
 /*!40000 ALTER TABLE `radacct` DISABLE KEYS */;
 INSERT INTO `radacct` (`radacctid`, `acctsessionid`, `acctuniqueid`, `username`, `groupname`, `realm`, `nasipaddress`, `nasportid`, `nasporttype`, `acctstarttime`, `acctstoptime`, `acctsessiontime`, `acctauthentic`, `connectinfo_start`, `connectinfo_stop`, `acctinputoctets`, `acctoutputoctets`, `calledstationid`, `callingstationid`, `acctterminatecause`, `servicetype`, `framedprotocol`, `framedipaddress`, `acctstartdelay`, `acctstopdelay`, `xascendsessionsvrkey`) VALUES
 	(4, 'e2f9d84bd2e66ee6', 'cc0f437f9c60da42', 'demo', '', '', '172.16.10.1', '2140', 'Ethernet', '2015-07-04 19:04:45', '2015-07-04 19:05:19', 34, 'RADIUS', '', '', 0, 0, '172.16.10.1', '00:30:67:37:45:10', 'User-Request', '', '', '172.16.10.10', 0, 0, '');
 /*!40000 ALTER TABLE `radacct` ENABLE KEYS */;
 
 
--- tablo yapısı dökülüyor net_yonetim.radcheck
+-- tablo yapısı dökülüyor boxnet.radcheck
 CREATE TABLE IF NOT EXISTS `radcheck` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(64) NOT NULL DEFAULT '',
@@ -138,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `radcheck` (
   KEY `username` (`username`(32))
 ) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
 
--- Dumping data for table net_yonetim.radcheck: ~0 rows (yaklaşık)
+-- Dumping data for table boxnet.radcheck: ~0 rows (yaklaşık)
 /*!40000 ALTER TABLE `radcheck` DISABLE KEYS */;
 INSERT INTO `radcheck` (`id`, `username`, `attribute`, `op`, `value`, `UyeID`, `GrupID`, `ProfilID`, `AdSoyad`, `KimlikNo`, `Telefon`, `DogumTarih`, `EPosta`, `KotaKB`, `EPostaOnay`, `SMSOnay`, `KotaTur`, `OdaNo`, `Tarih`, `BitisTarih`) VALUES
 	(55, 'demo', 'User-Password', '==', 'demo', 1, NULL, 15, 'demo', NULL, NULL, NULL, NULL, '0', 0, 0, NULL, NULL, '2015-07-04 19:03:50', NULL),
@@ -146,7 +138,7 @@ INSERT INTO `radcheck` (`id`, `username`, `attribute`, `op`, `value`, `UyeID`, `
 /*!40000 ALTER TABLE `radcheck` ENABLE KEYS */;
 
 
--- tablo yapısı dökülüyor net_yonetim.radgroupcheck
+-- tablo yapısı dökülüyor boxnet.radgroupcheck
 CREATE TABLE IF NOT EXISTS `radgroupcheck` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `groupname` varchar(64) NOT NULL DEFAULT '',
@@ -158,14 +150,14 @@ CREATE TABLE IF NOT EXISTS `radgroupcheck` (
   `Tarih` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `groupname` (`groupname`(32))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table net_yonetim.radgroupcheck: ~0 rows (yaklaşık)
+-- Dumping data for table boxnet.radgroupcheck: ~0 rows (yaklaşık)
 /*!40000 ALTER TABLE `radgroupcheck` DISABLE KEYS */;
 /*!40000 ALTER TABLE `radgroupcheck` ENABLE KEYS */;
 
 
--- tablo yapısı dökülüyor net_yonetim.radgroupreply
+-- tablo yapısı dökülüyor boxnet.radgroupreply
 CREATE TABLE IF NOT EXISTS `radgroupreply` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `groupname` varchar(64) NOT NULL DEFAULT '',
@@ -178,12 +170,12 @@ CREATE TABLE IF NOT EXISTS `radgroupreply` (
   KEY `groupname` (`groupname`(32))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table net_yonetim.radgroupreply: ~0 rows (yaklaşık)
+-- Dumping data for table boxnet.radgroupreply: ~0 rows (yaklaşık)
 /*!40000 ALTER TABLE `radgroupreply` DISABLE KEYS */;
 /*!40000 ALTER TABLE `radgroupreply` ENABLE KEYS */;
 
 
--- tablo yapısı dökülüyor net_yonetim.radippool
+-- tablo yapısı dökülüyor boxnet.radippool
 CREATE TABLE IF NOT EXISTS `radippool` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `pool_name` varchar(30) NOT NULL,
@@ -198,14 +190,14 @@ CREATE TABLE IF NOT EXISTS `radippool` (
   KEY `radippool_poolname_expire` (`pool_name`,`expiry_time`),
   KEY `framedipaddress` (`framedipaddress`),
   KEY `radippool_nasip_poolkey_ipaddress` (`nasipaddress`,`pool_key`,`framedipaddress`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table net_yonetim.radippool: ~0 rows (yaklaşık)
+-- Dumping data for table boxnet.radippool: ~0 rows (yaklaşık)
 /*!40000 ALTER TABLE `radippool` DISABLE KEYS */;
 /*!40000 ALTER TABLE `radippool` ENABLE KEYS */;
 
 
--- tablo yapısı dökülüyor net_yonetim.radpostauth
+-- tablo yapısı dökülüyor boxnet.radpostauth
 CREATE TABLE IF NOT EXISTS `radpostauth` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(64) NOT NULL DEFAULT '',
@@ -213,14 +205,14 @@ CREATE TABLE IF NOT EXISTS `radpostauth` (
   `reply` varchar(32) NOT NULL DEFAULT '',
   `authdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table net_yonetim.radpostauth: ~0 rows (yaklaşık)
+-- Dumping data for table boxnet.radpostauth: ~0 rows (yaklaşık)
 /*!40000 ALTER TABLE `radpostauth` DISABLE KEYS */;
 /*!40000 ALTER TABLE `radpostauth` ENABLE KEYS */;
 
 
--- tablo yapısı dökülüyor net_yonetim.radreply
+-- tablo yapısı dökülüyor boxnet.radreply
 CREATE TABLE IF NOT EXISTS `radreply` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(64) NOT NULL DEFAULT '',
@@ -232,7 +224,7 @@ CREATE TABLE IF NOT EXISTS `radreply` (
   KEY `username` (`username`(32))
 ) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=latin5;
 
--- Dumping data for table net_yonetim.radreply: ~0 rows (yaklaşık)
+-- Dumping data for table boxnet.radreply: ~0 rows (yaklaşık)
 /*!40000 ALTER TABLE `radreply` DISABLE KEYS */;
 INSERT INTO `radreply` (`id`, `username`, `attribute`, `op`, `value`, `ProfilID`) VALUES
 	(82, 'demo', 'WISPr-Bandwidth-Max-Down', '==', '2097152', 15),
@@ -241,7 +233,7 @@ INSERT INTO `radreply` (`id`, `username`, `attribute`, `op`, `value`, `ProfilID`
 /*!40000 ALTER TABLE `radreply` ENABLE KEYS */;
 
 
--- tablo yapısı dökülüyor net_yonetim.radusergroup
+-- tablo yapısı dökülüyor boxnet.radusergroup
 CREATE TABLE IF NOT EXISTS `radusergroup` (
   `username` varchar(64) NOT NULL DEFAULT '',
   `groupname` varchar(64) NOT NULL DEFAULT '',
@@ -249,12 +241,12 @@ CREATE TABLE IF NOT EXISTS `radusergroup` (
   KEY `username` (`username`(32))
 ) ENGINE=InnoDB DEFAULT CHARSET=latin5;
 
--- Dumping data for table net_yonetim.radusergroup: ~0 rows (yaklaşık)
+-- Dumping data for table boxnet.radusergroup: ~0 rows (yaklaşık)
 /*!40000 ALTER TABLE `radusergroup` DISABLE KEYS */;
 /*!40000 ALTER TABLE `radusergroup` ENABLE KEYS */;
 
 
--- yöntem yapısı dökülüyor net_yonetim.sp_kullanicihareketler
+-- yöntem yapısı dökülüyor boxnet.sp_kullanicihareketler
 DELIMITER //
 CREATE DEFINER=`boxnet`@`%` PROCEDURE `sp_kullanicihareketler`()
 BEGIN
@@ -279,7 +271,7 @@ END//
 DELIMITER ;
 
 
--- yöntem yapısı dökülüyor net_yonetim.sp_kullanicitumhareketler
+-- yöntem yapısı dökülüyor boxnet.sp_kullanicitumhareketler
 DELIMITER //
 CREATE DEFINER=`boxnet`@`%` PROCEDURE `sp_kullanicitumhareketler`(IN `$$toplam` INT, IN `$$baslangic` INT, IN `$$filter` varCHAR(50))
 BEGIN
@@ -319,12 +311,13 @@ END//
 DELIMITER ;
 
 
--- tablo yapısı dökülüyor net_yonetim.tbl_ayar
+-- tablo yapısı dökülüyor boxnet.tbl_ayar
 CREATE TABLE IF NOT EXISTS `tbl_ayar` (
   `AyarID` int(11) NOT NULL AUTO_INCREMENT,
   `MailGonderenAd` varchar(50) DEFAULT NULL,
   `MailHostIp` varchar(100) DEFAULT NULL,
   `MailKullaniciAdi` varchar(50) DEFAULT NULL,
+  `facebookHesapProfilID` bit(1) DEFAULT b'0',
   `MailSifre` varchar(50) DEFAULT NULL,
   `SmsFirma` varchar(50) DEFAULT NULL,
   `SmsBaslik` varchar(50) DEFAULT NULL,
@@ -350,6 +343,7 @@ CREATE TABLE IF NOT EXISTS `tbl_ayar` (
   `grsGuvenlik` bit(1) DEFAULT b'0',
   `grsPosta` bit(1) DEFAULT b'0',
   `grsBilet` bit(1) DEFAULT b'0',
+  `grsFacebook` bit(1) DEFAULT b'0',
   `grsVoucher` bit(1) DEFAULT b'0',
   `grsBizeYazin` bit(1) DEFAULT b'0',
   `SliderAktif` bit(1) DEFAULT b'0',
@@ -365,14 +359,14 @@ CREATE TABLE IF NOT EXISTS `tbl_ayar` (
   PRIMARY KEY (`AyarID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- Dumping data for table net_yonetim.tbl_ayar: ~1 rows (yaklaşık)
+-- Dumping data for table boxnet.tbl_ayar: ~1 rows (yaklaşık)
 /*!40000 ALTER TABLE `tbl_ayar` DISABLE KEYS */;
 INSERT INTO `tbl_ayar` (`AyarID`, `MailGonderenAd`, `MailHostIp`, `MailKullaniciAdi`, `MailSifre`, `SmsFirma`, `SmsBaslik`, `SmsApi`, `SmsKullaniciAdi`, `SmsSifre`, `SmsSablon`, `SmsGonderimLimiti`, `LoginKullaniciAdiText`, `LoginSifreText`, `EntegreProgram`, `sqlhost`, `sqlport`, `sqldbname`, `sqluser`, `sqlpass`, `sqlprofilid`, `grsNetyum`, `grsOzel`, `grsKurumsal`, `grsTc`, `grsSms`, `grsGuvenlik`, `grsPosta`, `grsBilet`, `grsVoucher`, `grsBizeYazin`, `SliderAktif`, `SliderSure`, `AktifDil`, `MacAktif`, `BiletBaslik`, `BiletSablon`, `TcHesapProfilID`, `SmsHesapProfilID`, `GuvenlikHesapProfilID`, `PostaHesapProfilID`) VALUES
 	(1, 'Boxnet Hotspot Yonetimi', 'mail.simyacibilisim.com', 'info@simyacibilisim.com', '123123', 'mobilpark', 'BASLIK', 'APIURL', 'KullaniciAdi', 'Sifre', 'Internet erisimi icin Kullanıcı Adınız:{telefon} Şifreniz:{sifre}', 30, NULL, NULL, 'Amonra_XML', '192.168.1.87', '50456', 'C:/AKINSOFT/Wolvox7/Database_FB/DEMO_WOLVOX/2014/WOLVOX.FDB', 'SYSDBA', 'masterkey', 4, b'1', b'0', b'0', b'0', b'0', b'0', b'0', b'0', b'1', b'0', b'1', '500000', 'TR', b'0', 'Boxnet', '<div style="text-align: center;"><br></div><div style="text-align: center;"><span class="Apple-style-span" style="color: rgb(34, 34, 34); font-family: ´´PT Sans´´, sans-serif; line-height: 15px;">Sayın {adsoyad} Boxnet´e hoşgeldiniz.</span></div><div style="text-align: center;"><span class="Apple-style-span" style="color: rgb(34, 34, 34); font-family: ´´PT Sans´´, sans-serif; line-height: 15px;"><br></span></div><div style="text-align: center;"><span class="Apple-style-span" style="color: rgb(34, 34, 34); font-family: ´´PT Sans´´, sans-serif; line-height: 15px;">Bilet Numaranız : {biletno}</span></div><div style="text-align: center;"><span class="Apple-style-span" style="color: rgb(34, 34, 34); font-family: ´´PT Sans´´, sans-serif; line-height: 15px;">Bilet Süreniz : {biletsuresi}</span></div><div style="text-align: center;"><span class="Apple-style-span" style="color: rgb(34, 34, 34); font-family: ´´PT Sans´´, sans-serif; line-height: 15px;"><br></span></div><div style="text-align: center;"><span class="Apple-style-span" style="color: rgb(34, 34, 34); font-family: ´´PT Sans´´, sans-serif; line-height: 15px;">İnternet erişimleriniz 5651 sayısı gereğince kayıt altına alınmaktadır.</span></div><div style="text-align: center;"><span class="Apple-style-span" style="color: rgb(34, 34, 34); font-family: ´´PT Sans´´, sans-serif; line-height: 15px;"><br></span></div>', 15, 15, 15, 15);
 /*!40000 ALTER TABLE `tbl_ayar` ENABLE KEYS */;
 
 
--- tablo yapısı dökülüyor net_yonetim.tbl_bilet
+-- tablo yapısı dökülüyor boxnet.tbl_bilet
 CREATE TABLE IF NOT EXISTS `tbl_bilet` (
   `BiletID` int(11) NOT NULL AUTO_INCREMENT,
   `BiletNo` varchar(50) COLLATE utf8_bin NOT NULL,
@@ -384,12 +378,12 @@ CREATE TABLE IF NOT EXISTS `tbl_bilet` (
   PRIMARY KEY (`BiletID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Dumping data for table net_yonetim.tbl_bilet: ~0 rows (yaklaşık)
+-- Dumping data for table boxnet.tbl_bilet: ~0 rows (yaklaşık)
 /*!40000 ALTER TABLE `tbl_bilet` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tbl_bilet` ENABLE KEYS */;
 
 
--- tablo yapısı dökülüyor net_yonetim.tbl_dil
+-- tablo yapısı dökülüyor boxnet.tbl_dil
 CREATE TABLE IF NOT EXISTS `tbl_dil` (
   `DilID` int(11) NOT NULL AUTO_INCREMENT,
   `Dil` varchar(3) DEFAULT NULL,
@@ -398,7 +392,7 @@ CREATE TABLE IF NOT EXISTS `tbl_dil` (
   UNIQUE KEY `Dil` (`Dil`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
--- Dumping data for table net_yonetim.tbl_dil: ~5 rows (yaklaşık)
+-- Dumping data for table boxnet.tbl_dil: ~5 rows (yaklaşık)
 /*!40000 ALTER TABLE `tbl_dil` DISABLE KEYS */;
 INSERT INTO `tbl_dil` (`DilID`, `Dil`, `Aciklama`) VALUES
 	(1, 'TR', ''),
@@ -408,8 +402,26 @@ INSERT INTO `tbl_dil` (`DilID`, `Dil`, `Aciklama`) VALUES
 	(7, 'RU', NULL);
 /*!40000 ALTER TABLE `tbl_dil` ENABLE KEYS */;
 
+-- Veri çıktısı seçilmemişti
+-- tablo yapısı dökülüyor boxnet.tbl_facebook
+CREATE TABLE IF NOT EXISTS `tbl_facebook` (
+  `UyeID` int(11) NOT NULL AUTO_INCREMENT,
+  `ProfilID` int(11) DEFAULT NULL,
+  `KullaniciAdi` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `Sifre` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `email` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `oauth_provider` enum('','facebook','google','twitter') COLLATE utf8_bin DEFAULT NULL,
+  `oauth_uid` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `AdSoyad` varchar(50) CHARACTER SET utf8 COLLATE utf8_turkish_ci DEFAULT NULL,
+  `Tarih` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `picture` varchar(500) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`UyeID`),
+  UNIQUE KEY `KullaniciAdi` (`KullaniciAdi`),
+  KEY `FK_tbl_facebook_tbl_profil` (`ProfilID`),
+  CONSTRAINT `FK_tbl_facebook_tbl_profil` FOREIGN KEY (`ProfilID`) REFERENCES `tbl_profil` (`ProfilID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- tablo yapısı dökülüyor net_yonetim.tbl_kullanici
+-- tablo yapısı dökülüyor boxnet.tbl_kullanici
 CREATE TABLE IF NOT EXISTS `tbl_kullanici` (
   `KullaniciID` int(10) NOT NULL AUTO_INCREMENT,
   `AdSoyad` varchar(50) DEFAULT NULL,
@@ -421,7 +433,7 @@ CREATE TABLE IF NOT EXISTS `tbl_kullanici` (
   PRIMARY KEY (`KullaniciID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
--- Dumping data for table net_yonetim.tbl_kullanici: ~2 rows (yaklaşık)
+-- Dumping data for table boxnet.tbl_kullanici: ~2 rows (yaklaşık)
 /*!40000 ALTER TABLE `tbl_kullanici` DISABLE KEYS */;
 INSERT INTO `tbl_kullanici` (`KullaniciID`, `AdSoyad`, `Telefon`, `Mail`, `KullaniciAdi`, `Sifre`, `Tarih`) VALUES
 	(6, 'Boxnet Administrator', '0 216 970 06 44', 'info@simyacibilisim.com', 'admin', 'BOXnet2014smyc', '2014-10-17 01:07:44'),
@@ -429,7 +441,7 @@ INSERT INTO `tbl_kullanici` (`KullaniciID`, `AdSoyad`, `Telefon`, `Mail`, `Kulla
 /*!40000 ALTER TABLE `tbl_kullanici` ENABLE KEYS */;
 
 
--- tablo yapısı dökülüyor net_yonetim.tbl_kullanici_yetki
+-- tablo yapısı dökülüyor boxnet.tbl_kullanici_yetki
 CREATE TABLE IF NOT EXISTS `tbl_kullanici_yetki` (
   `KullaniciID` int(11) DEFAULT NULL,
   `Yetki` varchar(50) COLLATE utf8_bin DEFAULT NULL,
@@ -443,7 +455,7 @@ CREATE TABLE IF NOT EXISTS `tbl_kullanici_yetki` (
   CONSTRAINT `FK__tbl_yetki` FOREIGN KEY (`Yetki`) REFERENCES `tbl_yetki` (`Yetki`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Dumping data for table net_yonetim.tbl_kullanici_yetki: ~34 rows (yaklaşık)
+-- Dumping data for table boxnet.tbl_kullanici_yetki: ~34 rows (yaklaşık)
 /*!40000 ALTER TABLE `tbl_kullanici_yetki` DISABLE KEYS */;
 INSERT INTO `tbl_kullanici_yetki` (`KullaniciID`, `Yetki`, `Yeni`, `Duzenle`, `Sil`) VALUES
 	(7, 'gunlukler_hesap_hareketleri', NULL, NULL, NULL),
@@ -483,7 +495,7 @@ INSERT INTO `tbl_kullanici_yetki` (`KullaniciID`, `Yetki`, `Yeni`, `Duzenle`, `S
 /*!40000 ALTER TABLE `tbl_kullanici_yetki` ENABLE KEYS */;
 
 
--- tablo yapısı dökülüyor net_yonetim.tbl_kurumsal
+-- tablo yapısı dökülüyor boxnet.tbl_kurumsal
 CREATE TABLE IF NOT EXISTS `tbl_kurumsal` (
   `UyeID` int(11) NOT NULL AUTO_INCREMENT,
   `ProfilID` int(11) DEFAULT NULL,
@@ -497,12 +509,12 @@ CREATE TABLE IF NOT EXISTS `tbl_kurumsal` (
   CONSTRAINT `FK_tbl_kurumsal_tbl_profil` FOREIGN KEY (`ProfilID`) REFERENCES `tbl_profil` (`ProfilID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Dumping data for table net_yonetim.tbl_kurumsal: ~0 rows (yaklaşık)
+-- Dumping data for table boxnet.tbl_kurumsal: ~0 rows (yaklaşık)
 /*!40000 ALTER TABLE `tbl_kurumsal` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tbl_kurumsal` ENABLE KEYS */;
 
 
--- tablo yapısı dökülüyor net_yonetim.tbl_macban
+-- tablo yapısı dökülüyor boxnet.tbl_macban
 CREATE TABLE IF NOT EXISTS `tbl_macban` (
   `BanID` int(11) NOT NULL AUTO_INCREMENT,
   `Username` varchar(100) COLLATE utf8_bin DEFAULT NULL,
@@ -512,12 +524,12 @@ CREATE TABLE IF NOT EXISTS `tbl_macban` (
   KEY `Mac` (`Mac`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Dumping data for table net_yonetim.tbl_macban: ~0 rows (yaklaşık)
+-- Dumping data for table boxnet.tbl_macban: ~0 rows (yaklaşık)
 /*!40000 ALTER TABLE `tbl_macban` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tbl_macban` ENABLE KEYS */;
 
 
--- tablo yapısı dökülüyor net_yonetim.tbl_mesaj
+-- tablo yapısı dökülüyor boxnet.tbl_mesaj
 CREATE TABLE IF NOT EXISTS `tbl_mesaj` (
   `MesajID` int(11) NOT NULL AUTO_INCREMENT,
   `AdSoyad` varchar(50) DEFAULT NULL,
@@ -530,12 +542,12 @@ CREATE TABLE IF NOT EXISTS `tbl_mesaj` (
   PRIMARY KEY (`MesajID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table net_yonetim.tbl_mesaj: ~0 rows (yaklaşık)
+-- Dumping data for table boxnet.tbl_mesaj: ~0 rows (yaklaşık)
 /*!40000 ALTER TABLE `tbl_mesaj` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tbl_mesaj` ENABLE KEYS */;
 
 
--- tablo yapısı dökülüyor net_yonetim.tbl_profil
+-- tablo yapısı dökülüyor boxnet.tbl_profil
 CREATE TABLE IF NOT EXISTS `tbl_profil` (
   `ProfilID` int(11) NOT NULL AUTO_INCREMENT,
   `ProfilAdi` varchar(50) COLLATE utf8_bin NOT NULL,
@@ -555,7 +567,7 @@ CREATE TABLE IF NOT EXISTS `tbl_profil` (
   PRIMARY KEY (`ProfilID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Dumping data for table net_yonetim.tbl_profil: ~4 rows (yaklaşık)
+-- Dumping data for table boxnet.tbl_profil: ~4 rows (yaklaşık)
 /*!40000 ALTER TABLE `tbl_profil` DISABLE KEYS */;
 INSERT INTO `tbl_profil` (`ProfilID`, `ProfilAdi`, `Aciklama`, `ProfilTuru`, `HesapTuru`, `Sure`, `Url`, `MaxDownload`, `MaxUpload`, `Kota`, `KotaTuru`, `AkkOnay`, `AkkD`, `AkkU`, `Tariih`) VALUES
 	(15, 'Limitsiz', 'Limitsiz', 'Gunluk', 'Gunluk', '4999', 'http://www.google.com.tr', '2097152', '524288', '0', NULL, b'0', '0', '0', '2014-10-17 01:28:12'),
@@ -565,7 +577,7 @@ INSERT INTO `tbl_profil` (`ProfilID`, `ProfilAdi`, `Aciklama`, `ProfilTuru`, `He
 /*!40000 ALTER TABLE `tbl_profil` ENABLE KEYS */;
 
 
--- tablo yapısı dökülüyor net_yonetim.tbl_resim
+-- tablo yapısı dökülüyor boxnet.tbl_resim
 CREATE TABLE IF NOT EXISTS `tbl_resim` (
   `ResimID` int(11) NOT NULL AUTO_INCREMENT,
   `Resim` varchar(50) COLLATE utf8_bin DEFAULT NULL,
@@ -574,7 +586,7 @@ CREATE TABLE IF NOT EXISTS `tbl_resim` (
   PRIMARY KEY (`ResimID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Dumping data for table net_yonetim.tbl_resim: ~3 rows (yaklaşık)
+-- Dumping data for table boxnet.tbl_resim: ~3 rows (yaklaşık)
 /*!40000 ALTER TABLE `tbl_resim` DISABLE KEYS */;
 INSERT INTO `tbl_resim` (`ResimID`, `Resim`, `Logo`, `Tarih`) VALUES
 	(30, 'captiveportal-captiveportal-2.jpg', b'0', '2014-09-30 00:30:07'),
@@ -583,7 +595,7 @@ INSERT INTO `tbl_resim` (`ResimID`, `Resim`, `Logo`, `Tarih`) VALUES
 /*!40000 ALTER TABLE `tbl_resim` ENABLE KEYS */;
 
 
--- tablo yapısı dökülüyor net_yonetim.tbl_smslog
+-- tablo yapısı dökülüyor boxnet.tbl_smslog
 CREATE TABLE IF NOT EXISTS `tbl_smslog` (
   `LogID` int(11) NOT NULL AUTO_INCREMENT,
   `AdSoyad` varchar(50) COLLATE utf8_bin DEFAULT NULL,
@@ -595,12 +607,12 @@ CREATE TABLE IF NOT EXISTS `tbl_smslog` (
   PRIMARY KEY (`LogID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Dumping data for table net_yonetim.tbl_smslog: ~0 rows (yaklaşık)
+-- Dumping data for table boxnet.tbl_smslog: ~0 rows (yaklaşık)
 /*!40000 ALTER TABLE `tbl_smslog` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tbl_smslog` ENABLE KEYS */;
 
 
--- tablo yapısı dökülüyor net_yonetim.tbl_text
+-- tablo yapısı dökülüyor boxnet.tbl_text
 CREATE TABLE IF NOT EXISTS `tbl_text` (
   `TextID` int(11) NOT NULL AUTO_INCREMENT,
   `DilID` int(11) NOT NULL DEFAULT '0',
@@ -610,9 +622,9 @@ CREATE TABLE IF NOT EXISTS `tbl_text` (
   PRIMARY KEY (`TextID`),
   KEY `FK_tbl_text_tbl_dil` (`DilID`),
   CONSTRAINT `FK_tbl_text_tbl_dil` FOREIGN KEY (`DilID`) REFERENCES `tbl_dil` (`DilID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=189 DEFAULT CHARSET=utf8;
+) ENGINE = INNODB DEFAULT CHARSET=utf8;
 
--- Dumping data for table net_yonetim.tbl_text: ~133 rows (yaklaşık)
+-- Dumping data for table boxnet.tbl_text: ~133 rows (yaklaşık)
 /*!40000 ALTER TABLE `tbl_text` DISABLE KEYS */;
 INSERT INTO `tbl_text` (`TextID`, `DilID`, `trTextID`, `Txt`, `Deger`) VALUES
 	(1, 1, 1, 'grsNetyum', 'Kullanıcı Girişi'),
@@ -679,7 +691,7 @@ INSERT INTO `tbl_text` (`TextID`, `DilID`, `trTextID`, `Txt`, `Deger`) VALUES
 	(115, 1, 115, 'msjHataBizeYazin', 'Mesajınız gönderilemedi! Lütfen tekrar deneyiniz.'),
 	(116, 1, 116, 'msjHataBizeYazinFormKontrol', 'Mesajınız gönderilemedi! Lütfen formu eksiksiz giriniz.'),
 	(118, 1, 118, 'msjSonucBizeYazin', 'Mesajınız başarılı olarak gönderilmiştir.En kısa sürede size geri dönüş yapacağız.'),
-	(119, 1, 119, 'grsBan', 'Netyum Ban.......'),
+	(119, 1, 119, 'grsBan', 'Boxnet Ban......'),
 	(121, 1, 121, 'grsBanAciklama', 'Bu bilgisayar´dan internet erişiminiz engellenmiştir.Lütfen Sistem Yöneticinizle iletişime geçiniz.!'),
 	(122, 4, 1, 'grsNetyum', 'User Access'),
 	(123, 4, 2, 'grsNetyumKullaniciAdi', 'Username'),
@@ -747,11 +759,14 @@ INSERT INTO `tbl_text` (`TextID`, `DilID`, `trTextID`, `Txt`, `Deger`) VALUES
 	(185, 4, 119, 'sozlesmemetni', '<div><span class="Apple-style-span" style="font-weight: bold;">"Visitor Wireless Internet Access" is only provided for Boxnet Ltd. Belekövisitor´s personal usage.</span></div><div><span class="Apple-style-span" style="font-weight: bold;"><br></span></div><div><span class="Apple-style-span" style="font-weight: bold;">Visitors are not allowed to share wireless network access with any person.</span></div><div><span class="Apple-style-span" style="font-weight: bold;">&nbsp;</span></div><div><span class="Apple-style-span" style="font-weight: bold;">Boxnet Ltd. is not responsible for the legal obligations stemming from sharing access and forbidden internet usage.</span></div><div><span class="Apple-style-span" style="font-weight: bold;">&nbsp;</span></div><div><span class="Apple-style-span" style="font-weight: bold;">According to the law enacted on 23.05.2007, All movements on the network are recorded.</span></div><div><span class="Apple-style-span" style="font-weight: bold;">&nbsp;</span></div><div><span class="Apple-style-span" style="font-weight: bold;">Visitors are responsible for their unlegal internet usage.</span></div><div><span class="Apple-style-span" style="font-weight: bold;">&nbsp;</span></div><div><span class="Apple-style-span" style="font-weight: bold;">It is prohibited to send mass mailing, mail bombing, spam, Dos attack, Port network scanning ..etc.</span></div><div><span class="Apple-style-span" style="font-weight: bold;">&nbsp;</span></div><div><span class="Apple-style-span" style="font-weight: bold;">Visitors accept abovementioned rules when they start using internet service.</span></div><div><span class="Apple-style-span" style="font-weight: bold;">&nbsp;</span></div><div><span class="Apple-style-span" style="font-weight: bold;">Boxnet Ltd. Dose Not accept any responsibilty or obligations caused by unlegal internet usage. Only users take responsibilty for the inconvenient usage.</span></div>'),
 	(186, 4, 121, 'footerMesaj', 'İnternet erişimleriniz 5651 sayılı kanun gereğince kayıt altına alınmaktadır.'),
 	(187, 1, 187, 'sozlesmemetni', '<div><span class="Apple-style-span" style="font-weight: bold;">Boxnet Ltd. Şti. "misafir kablosuz ağ erişimi", otelimize gelen misafirlerin bireysel kullanımına sunulmuş internet hizmetidir.</span></div><div><span class="Apple-style-span" style="font-weight: bold;"><br></span></div><div><span class="Apple-style-span" style="font-weight: bold;">Misafir kablosuz ağ erişimi kişiye özel olup başkaları ile paylaştırılamaz.</span></div><div><span class="Apple-style-span" style="font-weight: bold;"><br></span></div><div><span class="Apple-style-span" style="font-weight: bold;">Hizmetin paylaştırılması, yeniden dağıtılması, hizmetin amacına uygun kullanılmaması gibi nedenlerle oluşabilecek yasal yükümlülüklerden Boxnet Ltd. Şti. sorumlu tutulamaz.</span></div><div><span class="Apple-style-span" style="font-weight: bold;"><br></span></div><div><span class="Apple-style-span" style="font-weight: bold;">23.05.2007 tarihinde yürürlüğe giren 5651 sayılı Internet Ortamında Yapılan Yayınların Düzenlenmesi ve Bu Yayınlar Yoluyla İşlenen Suçlarla Mücadele Edilmesi Hakkında Kanun,  gereğince tüm internet trafiği kayıt altına alınmaktadır.</span></div><div><span class="Apple-style-span" style="font-weight: bold;"><br></span></div><div><span class="Apple-style-span" style="font-weight: bold;">Misafir kablosuz ağ erişimi hizmetinden faydalanan  Misafirler, gerçekleştirdikleri aktivitelerin yasal sonuçlarından kendileri sorumludurlar.</span></div><div><span class="Apple-style-span" style="font-weight: bold;"><br></span></div><div><span class="Apple-style-span" style="font-weight: bold;">Kablosuz ağ kaynakları kullanılarak, kütlesel e-posta gönderilmesi (mass mailing, mail bombing, spam) ve üçüncü şahısların göndermesine olanak sağlanması yasaktır.</span></div><div><span class="Apple-style-span" style="font-weight: bold;"><br></span></div><div><span class="Apple-style-span" style="font-weight: bold;">Ağ güvenliğini tehdit edici faaliyetlerde bulunmak (DoS saldırısı, port network taraması vb.) yasaktır.</span></div><div><span class="Apple-style-span" style="font-weight: bold;"><br></span></div><div><span class="Apple-style-span" style="font-weight: bold;">Bu hizmeti kullanmaya başladığınızda burada belirtilen şartları kubul etmiş sayılırsınız.</span></div><div><span class="Apple-style-span" style="font-weight: bold;"><br></span></div><div><span class="Apple-style-span" style="font-weight: bold;">YASAL SORUMLULUK REDDİ:</span></div><div><span class="Apple-style-span" style="font-weight: bold;"><br></span></div><div><span class="Apple-style-span" style="font-weight: bold;">Boxnet Ltd. Şti. kablosuz ağ kullanimindan doğacak riskler konusunda sorumluluk kabul etmez. Bütün sorumluluk kullaniciya aittir.</span></div>'),
-	(188, 1, 188, 'footerMesaj', 'İnternet erişimleriniz 5651 sayılı kanun gereğince kayıt altına alınmaktadır.');
+	(188, 1, 188, 'footerMesaj', 'İnternet erişimleriniz 5651 sayılı kanun gereğince kayıt altına alınmaktadır.'),
+	(189, 1, 189, 'grsFacebookTitle', 'Facebook ile Bağlan'),
+	(190, 1, 190, 'grsFacebookMesaj', 'Merhaba'),
+	(191, 1, 191, 'grsFacebookGiris', 'İnternet Giriş Yap');
 /*!40000 ALTER TABLE `tbl_text` ENABLE KEYS */;
 
 
--- tablo yapısı dökülüyor net_yonetim.tbl_voucher
+-- tablo yapısı dökülüyor boxnet.tbl_voucher
 CREATE TABLE IF NOT EXISTS `tbl_voucher` (
   `VoucherID` int(11) NOT NULL AUTO_INCREMENT,
   `ProfilID` int(11) DEFAULT NULL,
@@ -764,19 +779,19 @@ CREATE TABLE IF NOT EXISTS `tbl_voucher` (
   CONSTRAINT `FK_tbl_voucher_tbl_profil` FOREIGN KEY (`ProfilID`) REFERENCES `tbl_profil` (`ProfilID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Dumping data for table net_yonetim.tbl_voucher: ~0 rows (yaklaşık)
+-- Dumping data for table boxnet.tbl_voucher: ~0 rows (yaklaşık)
 /*!40000 ALTER TABLE `tbl_voucher` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tbl_voucher` ENABLE KEYS */;
 
 
--- tablo yapısı dökülüyor net_yonetim.tbl_yetki
+-- tablo yapısı dökülüyor boxnet.tbl_yetki
 CREATE TABLE IF NOT EXISTS `tbl_yetki` (
   `Yetki` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `Aciklama` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   UNIQUE KEY `Yetki` (`Yetki`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table net_yonetim.tbl_yetki: ~23 rows (yaklaşık)
+-- Dumping data for table boxnet.tbl_yetki: ~23 rows (yaklaşık)
 /*!40000 ALTER TABLE `tbl_yetki` DISABLE KEYS */;
 INSERT INTO `tbl_yetki` (`Yetki`, `Aciklama`) VALUES
 	('profil_yonetimi_profiller', 'profil yönetimi > profil hesaplarını, düzenleme ve silme'),
@@ -805,7 +820,7 @@ INSERT INTO `tbl_yetki` (`Yetki`, `Aciklama`) VALUES
 /*!40000 ALTER TABLE `tbl_yetki` ENABLE KEYS */;
 
 
--- görünüm yapısı dökülüyor net_yonetim.vw_groupkullanicidownload
+-- görünüm yapısı dökülüyor boxnet.vw_groupkullanicidownload
 -- VIEW bağımlılık sorunlarını çözmek için geçici tablolar oluşturuluyor
 CREATE TABLE `vw_groupkullanicidownload` (
 	`groupname` VARCHAR(64) NULL COLLATE 'latin1_swedish_ci',
@@ -815,7 +830,7 @@ CREATE TABLE `vw_groupkullanicidownload` (
 ) ENGINE=MyISAM;
 
 
--- görünüm yapısı dökülüyor net_yonetim.vw_grupkota
+-- görünüm yapısı dökülüyor boxnet.vw_grupkota
 -- VIEW bağımlılık sorunlarını çözmek için geçici tablolar oluşturuluyor
 CREATE TABLE `vw_grupkota` (
 	`groupname` VARCHAR(64) NOT NULL COLLATE 'latin1_swedish_ci',
@@ -826,7 +841,7 @@ CREATE TABLE `vw_grupkota` (
 ) ENGINE=MyISAM;
 
 
--- görünüm yapısı dökülüyor net_yonetim.vw_internetkullanimi
+-- görünüm yapısı dökülüyor boxnet.vw_internetkullanimi
 -- VIEW bağımlılık sorunlarını çözmek için geçici tablolar oluşturuluyor
 CREATE TABLE `vw_internetkullanimi` (
 	`Tarih` VARCHAR(10) NULL COLLATE 'utf8mb4_general_ci',
@@ -835,7 +850,7 @@ CREATE TABLE `vw_internetkullanimi` (
 ) ENGINE=MyISAM;
 
 
--- görünüm yapısı dökülüyor net_yonetim.vw_kullanicidownload
+-- görünüm yapısı dökülüyor boxnet.vw_kullanicidownload
 -- VIEW bağımlılık sorunlarını çözmek için geçici tablolar oluşturuluyor
 CREATE TABLE `vw_kullanicidownload` (
 	`username` VARCHAR(64) NOT NULL COLLATE 'latin1_swedish_ci',
@@ -844,7 +859,7 @@ CREATE TABLE `vw_kullanicidownload` (
 ) ENGINE=MyISAM;
 
 
--- görünüm yapısı dökülüyor net_yonetim.vw_kullanicikota
+-- görünüm yapısı dökülüyor boxnet.vw_kullanicikota
 -- VIEW bağımlılık sorunlarını çözmek için geçici tablolar oluşturuluyor
 CREATE TABLE `vw_kullanicikota` (
 	`id` INT(11) UNSIGNED NOT NULL,
@@ -857,7 +872,7 @@ CREATE TABLE `vw_kullanicikota` (
 ) ENGINE=MyISAM;
 
 
--- görünüm yapısı dökülüyor net_yonetim.vw_kullanicimac
+-- görünüm yapısı dökülüyor boxnet.vw_kullanicimac
 -- VIEW bağımlılık sorunlarını çözmek için geçici tablolar oluşturuluyor
 CREATE TABLE `vw_kullanicimac` (
 	`radacctid` BIGINT(21) NOT NULL,
@@ -867,37 +882,37 @@ CREATE TABLE `vw_kullanicimac` (
 ) ENGINE=MyISAM;
 
 
--- görünüm yapısı dökülüyor net_yonetim.vw_groupkullanicidownload
+-- görünüm yapısı dökülüyor boxnet.vw_groupkullanicidownload
 -- Geçici tablolar temizlenerek final VIEW oluşturuluyor
 DROP TABLE IF EXISTS `vw_groupkullanicidownload`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`boxnet`@`%` SQL SECURITY DEFINER VIEW `vw_groupkullanicidownload` AS select (select `radgroupcheck`.`groupname` from (`radcheck` join `radgroupcheck` on((`radgroupcheck`.`id` = `radcheck`.`GrupID`))) where (`radcheck`.`username` = convert(`radacct`.`username` using utf8))) AS `groupname`,`radacct`.`username` AS `username`,`radacct`.`acctinputoctets` AS `acctinputoctets`,date_format(`radacct`.`acctstarttime`,'%Y-%m-%d') AS `Tarih` from `radacct` where `radacct`.`username` in (select `radcheck`.`username` from `radcheck` where (`radcheck`.`GrupID` is not null) group by `radcheck`.`username`);
 
 
--- görünüm yapısı dökülüyor net_yonetim.vw_grupkota
+-- görünüm yapısı dökülüyor boxnet.vw_grupkota
 -- Geçici tablolar temizlenerek final VIEW oluşturuluyor
 DROP TABLE IF EXISTS `vw_grupkota`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`boxnet`@`%` SQL SECURITY DEFINER VIEW `vw_grupkota` AS select `r`.`groupname` AS `groupname`,`p`.`KotaTuru` AS `KotaTur`,`p`.`MaxDownload` AS `KotaKb`,`r`.`Tarih` AS `Tarih`,date_format(now(),'%Y-%m-%d') AS `Bugun` from (`radgroupcheck` `r` join `tbl_profil` `p` on((`p`.`ProfilID` = `r`.`ProfilID`))) group by `r`.`groupname`;
 
 
--- görünüm yapısı dökülüyor net_yonetim.vw_internetkullanimi
+-- görünüm yapısı dökülüyor boxnet.vw_internetkullanimi
 -- Geçici tablolar temizlenerek final VIEW oluşturuluyor
 DROP TABLE IF EXISTS `vw_internetkullanimi`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`boxnet`@`%` SQL SECURITY DEFINER VIEW `vw_internetkullanimi` AS select date_format(`radacct`.`acctstarttime`,'%d.%m.%Y') AS `Tarih`,count(0) AS `ToplamKayit`,round(((((sum(`radacct`.`acctinputoctets`) + sum(`radacct`.`acctoutputoctets`)) / 1024) / 1024) / 1024),2) AS `Trafik` from `radacct` group by date_format(`radacct`.`acctstarttime`,'%d.%m.%Y') order by `radacct`.`acctstarttime` desc limit 0,9;
 
 
--- görünüm yapısı dökülüyor net_yonetim.vw_kullanicidownload
+-- görünüm yapısı dökülüyor boxnet.vw_kullanicidownload
 -- Geçici tablolar temizlenerek final VIEW oluşturuluyor
 DROP TABLE IF EXISTS `vw_kullanicidownload`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`boxnet`@`%` SQL SECURITY DEFINER VIEW `vw_kullanicidownload` AS select `radacct`.`username` AS `username`,`radacct`.`acctinputoctets` AS `acctinputoctets`,date_format(`radacct`.`acctstarttime`,'%Y-%m-%d') AS `Tarih` from `radacct` where `radacct`.`username` in (select `radcheck`.`username` from `radcheck` where (`radcheck`.`UyeID` <> 12) group by `radcheck`.`username`);
 
 
--- görünüm yapısı dökülüyor net_yonetim.vw_kullanicikota
+-- görünüm yapısı dökülüyor boxnet.vw_kullanicikota
 -- Geçici tablolar temizlenerek final VIEW oluşturuluyor
 DROP TABLE IF EXISTS `vw_kullanicikota`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`boxnet`@`%` SQL SECURITY DEFINER VIEW `vw_kullanicikota` AS select `radcheck`.`id` AS `id`,`radcheck`.`username` AS `username`,`radcheck`.`attribute` AS `attribute`,`radcheck`.`KotaKB` AS `KotaKb`,`radcheck`.`KotaTur` AS `KotaTur`,date_format(`radcheck`.`Tarih`,'%Y-%m-%d') AS `Tarih`,date_format(now(),'%Y-%m-%d') AS `Bugun` from `radcheck` where (`radcheck`.`KotaKB` is not null) group by `radcheck`.`username`;
 
 
--- görünüm yapısı dökülüyor net_yonetim.vw_kullanicimac
+-- görünüm yapısı dökülüyor boxnet.vw_kullanicimac
 -- Geçici tablolar temizlenerek final VIEW oluşturuluyor
 DROP TABLE IF EXISTS `vw_kullanicimac`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`boxnet`@`%` SQL SECURITY DEFINER VIEW `vw_kullanicimac` AS select `radacct`.`radacctid` AS `radacctid`,`radacct`.`username` AS `username`,`radacct`.`callingstationid` AS `callingstationid`,`radacct`.`acctstarttime` AS `acctstarttime` from `radacct` group by `radacct`.`callingstationid`;
