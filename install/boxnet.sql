@@ -88,25 +88,20 @@ CREATE TABLE IF NOT EXISTS `radacct` (
   `acctstartdelay` int(12) DEFAULT NULL,
   `acctstopdelay` int(12) DEFAULT NULL,
   `xascendsessionsvrkey` varchar(10) CHARACTER SET latin1 DEFAULT NULL,
-  
-  PRIMARY KEY (`radacctid`),
-  UNIQUE KEY 'acctuniqueid' ('acctuniqueid'),
-  KEY `username` (`username`),
-  KEY `framedipaddress` (`framedipaddress`),
-  KEY `acctsessionid` (`acctsessionid`),
-  KEY `acctsessiontime` (`acctsessiontime`),
-  KEY `acctuniqueid` (`acctuniqueid`),
-  KEY 'acctinterval' ('acctinterval'),
-  KEY `acctstoptime` (`acctstoptime`),
-  KEY `acctstarttime` (`acctstarttime`),
-  KEY `nasipaddress` (`nasipaddress`),
-  KEY `callingstationid` (`callingstationid`),
-  KEY `calledstationid` (`calledstationid`)
 
-
-
-
-
+  PRIMARY KEY (radacctid),
+  UNIQUE KEY acctuniqueid (acctuniqueid),
+  KEY username (username),
+  KEY framedipaddress (framedipaddress),
+  KEY acctsessionid (acctsessionid),
+  KEY acctsessiontime (acctsessiontime),
+  KEY acctuniqueid (acctuniqueid),
+  KEY acctinterval (acctinterval),
+  KEY acctstoptime (acctstoptime),
+  KEY acctstarttime (acctstarttime),
+  KEY nasipaddress (nasipaddress),
+  KEY callingstationid (callingstationid),
+  KEY calledstationid (calledstationid)
 ) ENGINE = INNODB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table net_yonetim.radacct: ~0 rows (yaklaşık)
@@ -162,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `radgroupcheck` (
   `Tarih` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `groupname` (`groupname`(32))
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table net_yonetim.radgroupcheck: ~0 rows (yaklaşık)
 /*!40000 ALTER TABLE `radgroupcheck` DISABLE KEYS */;
@@ -202,7 +197,7 @@ CREATE TABLE IF NOT EXISTS `radippool` (
   KEY `radippool_poolname_expire` (`pool_name`,`expiry_time`),
   KEY `framedipaddress` (`framedipaddress`),
   KEY `radippool_nasip_poolkey_ipaddress` (`nasipaddress`,`pool_key`,`framedipaddress`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table net_yonetim.radippool: ~0 rows (yaklaşık)
 /*!40000 ALTER TABLE `radippool` DISABLE KEYS */;
@@ -217,7 +212,7 @@ CREATE TABLE IF NOT EXISTS `radpostauth` (
   `reply` varchar(32) NOT NULL DEFAULT '',
   `authdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table net_yonetim.radpostauth: ~0 rows (yaklaşık)
 /*!40000 ALTER TABLE `radpostauth` DISABLE KEYS */;
