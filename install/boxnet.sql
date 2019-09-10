@@ -862,40 +862,31 @@ CREATE TABLE `vw_kullanicimac` (
 ) ENGINE=MyISAM;
 
 
--- görünüm yapısı dökülüyor boxnet.vw_groupkullanicidownload
--- Geçici tablolar temizlenerek final VIEW oluşturuluyor
+
 DROP TABLE IF EXISTS `vw_groupkullanicidownload`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`boxnet`@`%` SQL SECURITY DEFINER VIEW `vw_groupkullanicidownload` AS select (select `radgroupcheck`.`groupname` from (`radcheck` join `radgroupcheck` on((`radgroupcheck`.`id` = `radcheck`.`GrupID`))) where (`radcheck`.`username` = convert(`radacct`.`username` using utf8))) AS `groupname`,`radacct`.`username` AS `username`,`radacct`.`acctinputoctets` AS `acctinputoctets`,date_format(`radacct`.`acctstarttime`,'%Y-%m-%d') AS `Tarih` from `radacct` where `radacct`.`username` in (select `radcheck`.`username` from `radcheck` where (`radcheck`.`GrupID` is not null) group by `radcheck`.`username`);
 
 
--- görünüm yapısı dökülüyor boxnet.vw_grupkota
--- Geçici tablolar temizlenerek final VIEW oluşturuluyor
+
 DROP TABLE IF EXISTS `vw_grupkota`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`boxnet`@`%` SQL SECURITY DEFINER VIEW `vw_grupkota` AS select `r`.`groupname` AS `groupname`,`p`.`KotaTuru` AS `KotaTur`,`p`.`MaxDownload` AS `KotaKb`,`r`.`Tarih` AS `Tarih`,date_format(now(),'%Y-%m-%d') AS `Bugun` from (`radgroupcheck` `r` join `tbl_profil` `p` on((`p`.`ProfilID` = `r`.`ProfilID`))) group by `r`.`groupname`;
 
 
--- görünüm yapısı dökülüyor boxnet.vw_internetkullanimi
--- Geçici tablolar temizlenerek final VIEW oluşturuluyor
+
 DROP TABLE IF EXISTS `vw_internetkullanimi`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`boxnet`@`%` SQL SECURITY DEFINER VIEW `vw_internetkullanimi` AS select date_format(`radacct`.`acctstarttime`,'%d.%m.%Y') AS `Tarih`,count(0) AS `ToplamKayit`,round(((((sum(`radacct`.`acctinputoctets`) + sum(`radacct`.`acctoutputoctets`)) / 1024) / 1024) / 1024),2) AS `Trafik` from `radacct` group by date_format(`radacct`.`acctstarttime`,'%d.%m.%Y') order by `radacct`.`acctstarttime` desc limit 0,9;
 
 
--- görünüm yapısı dökülüyor boxnet.vw_kullanicidownload
--- Geçici tablolar temizlenerek final VIEW oluşturuluyor
+
 DROP TABLE IF EXISTS `vw_kullanicidownload`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`boxnet`@`%` SQL SECURITY DEFINER VIEW `vw_kullanicidownload` AS select `radacct`.`username` AS `username`,`radacct`.`acctinputoctets` AS `acctinputoctets`,date_format(`radacct`.`acctstarttime`,'%Y-%m-%d') AS `Tarih` from `radacct` where `radacct`.`username` in (select `radcheck`.`username` from `radcheck` where (`radcheck`.`UyeID` <> 12) group by `radcheck`.`username`);
 
 
--- görünüm yapısı dökülüyor boxnet.vw_kullanicikota
--- Geçici tablolar temizlenerek final VIEW oluşturuluyor
+
 DROP TABLE IF EXISTS `vw_kullanicikota`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`boxnet`@`%` SQL SECURITY DEFINER VIEW `vw_kullanicikota` AS select `radcheck`.`id` AS `id`,`radcheck`.`username` AS `username`,`radcheck`.`attribute` AS `attribute`,`radcheck`.`KotaKB` AS `KotaKb`,`radcheck`.`KotaTur` AS `KotaTur`,date_format(`radcheck`.`Tarih`,'%Y-%m-%d') AS `Tarih`,date_format(now(),'%Y-%m-%d') AS `Bugun` from `radcheck` where (`radcheck`.`KotaKB` is not null) group by `radcheck`.`username`;
 
 
--- görünüm yapısı dökülüyor boxnet.vw_kullanicimac
--- Geçici tablolar temizlenerek final VIEW oluşturuluyor
+
 DROP TABLE IF EXISTS `vw_kullanicimac`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`boxnet`@`%` SQL SECURITY DEFINER VIEW `vw_kullanicimac` AS select `radacct`.`radacctid` AS `radacctid`,`radacct`.`username` AS `username`,`radacct`.`callingstationid` AS `callingstationid`,`radacct`.`acctstarttime` AS `acctstarttime` from `radacct` group by `radacct`.`callingstationid`;
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
