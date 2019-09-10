@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `radcheck` (
 -- Dumping data for table boxnet.radcheck: ~0 rows (yaklaşık)
 /*!40000 ALTER TABLE `radcheck` DISABLE KEYS */;
 INSERT INTO `radcheck` (`id`, `username`, `attribute`, `op`, `value`, `UyeID`, `GrupID`, `ProfilID`, `AdSoyad`, `KimlikNo`, `Telefon`, `DogumTarih`, `EPosta`, `KotaKB`, `EPostaOnay`, `SMSOnay`, `KotaTur`, `OdaNo`, `Tarih`, `BitisTarih`) VALUES
-	(55, 'demo', 'User-Password', '==', 'demo', 1, NULL, 15, 'demo', NULL, NULL, NULL, NULL, '0', 0, 0, NULL, NULL, '2015-07-04 19:03:50', NULL),
+	(55, 'demo', 'Cleartext-Password', ':=', 'demo', 1, NULL, 15, 'demo', NULL, NULL, NULL, NULL, '0', 0, 0, NULL, NULL, '2015-07-04 19:03:50', NULL),
 	(56, 'demo', 'Expiration', '=', '11 Mar 2029', NULL, NULL, 15, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, '2015-07-04 19:03:50', NULL);
 /*!40000 ALTER TABLE `radcheck` ENABLE KEYS */;
 
