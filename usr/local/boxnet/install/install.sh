@@ -66,9 +66,6 @@ exec 3>&1 1>>${OUTPUTLOG} 2>&1
 # BOXNET Repodan cekiliyor...
 _cloneQHotspot
 
-# Root Repodan cekiliyor...
-_cloneBoxnet
-
 # MySQL 5.6 Server paketi kuruluyor...
 _mysqlInstall
 
@@ -225,22 +222,11 @@ fi
 
 _cloneQHotspot() {
     echo -n ${L_CLONEQHOTSPOT} 1>&3
-    cd /usr/local
-    git clone https://github.com/devbdo/demo.git boxnet
-    cd /usr/local/boxnet
-    cd /usr/local/boxnet/install
+    cd ..
+    git clone https://github.com/devbdo/demo.git 
     echo ${L_OK} 1>&3
 }
 
-_cloneBoxnet() {
-    echo -n ${L_CLONEBOXNET} 1>&3
-    cd ..
-    cd ..
-    git clone https://github.com/devbdo/demo.git boxnet
-    
-   
-    echo ${L_OK} 1>&3
-}
 
 _mysqlInstall() {
     echo -n ${L_MYSQLINSTALL} 1>&3
