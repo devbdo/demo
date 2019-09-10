@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `nas` (
   `description` varchar(200) DEFAULT 'RADIUS Client',
   PRIMARY KEY (`id`),
   KEY `nasname` (`nasname`)
-) ENGINE=ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table boxnet.nas: ~0 rows (yaklaşık)
 /*!40000 ALTER TABLE `nas` DISABLE KEYS */;
@@ -59,31 +59,31 @@ CREATE TABLE IF NOT EXISTS `nas` (
 
 -- tablo yapısı dökülüyor boxnet.radacct
 CREATE TABLE IF NOT EXISTS `radacct` (
-  `radacctid` radacctid bigint(21) NOT NULL AUTO_INCREMENT,
-  `acctsessionid` acctsessionid varchar(64) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `acctuniqueid` acctuniqueid varchar(32) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `username` username varchar(64) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `groupname` groupname varchar(64) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `realm`  realm varchar(64) CHARACTER SET latin1 DEFAULT '',
-  `nasipaddress` nasipaddress varchar(15) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `nasportid` nasportid varchar(15) CHARACTER SET latin1 DEFAULT NULL,
-  `nasporttype` nasporttype varchar(32) CHARACTER SET latin1 DEFAULT NULL,
-  `acctstarttime`  acctstarttime datetime DEFAULT NULL,
-  `acctupdatetime` acctupdatetime datetime NULL DEFAULT NULL,
-  `acctstoptime`   acctstoptime datetime DEFAULT NULL,
-  `acctinterval` acctinterval int(12) DEFAULT NULL,
-  `acctsessiontime` acctsessiontime int(12) DEFAULT NULL,
-  `acctauthentic` acctauthentic varchar(32) CHARACTER SET latin1 DEFAULT NULL,
-  `connectinfo_start` connectinfo_start varchar(50) CHARACTER SET latin1 DEFAULT NULL,
-  `connectinfo_stop` connectinfo_stop varchar(50) CHARACTER SET latin1 DEFAULT NULL,
-  `acctinputoctets` acctinputoctets  bigint(20) DEFAULT NULL,
-  `acctoutputoctets` acctoutputoctets bigint(20) DEFAULT NULL,
-  `calledstationid` calledstationid varchar(50) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `callingstationid` callingstationid varchar(50) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `acctterminatecause` acctterminatecause varchar(32) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `servicetype` servicetype varchar(32) CHARACTER SET latin1 DEFAULT NULL,
-  `framedprotocol` framedprotocol varchar(32) CHARACTER SET latin1 DEFAULT NULL,
-  `framedipaddress` framedipaddress  varchar(15) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `radacctid` bigint(21) NOT NULL AUTO_INCREMENT,
+  `acctsessionid` varchar(64) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `acctuniqueid` varchar(32) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `username` varchar(64) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `groupname` varchar(64) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `realm` varchar(64) CHARACTER SET latin1 DEFAULT '',
+  `nasipaddress` varchar(15) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `nasportid` varchar(15) CHARACTER SET latin1 DEFAULT NULL,
+  `nasporttype` varchar(32) CHARACTER SET latin1 DEFAULT NULL,
+  `acctstarttime`  datetime DEFAULT NULL,
+  `acctupdatetime` datetime NULL DEFAULT NULL,
+  `acctstoptime` datetime DEFAULT NULL,
+  `acctinterval` int(12) DEFAULT NULL,
+  `acctsessiontime` int(12) DEFAULT NULL,
+  `acctauthentic` varchar(32) CHARACTER SET latin1 DEFAULT NULL,
+  `connectinfo_start` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
+  `connectinfo_stop` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
+  `acctinputoctets` bigint(20) DEFAULT NULL,
+  `acctoutputoctets` bigint(20) DEFAULT NULL,
+  `calledstationid` varchar(50) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `callingstationid` varchar(50) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `acctterminatecause` varchar(32) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `servicetype` varchar(32) CHARACTER SET latin1 DEFAULT NULL,
+  `framedprotocol` varchar(32) CHARACTER SET latin1 DEFAULT NULL,
+  `framedipaddress` varchar(15) CHARACTER SET latin1 NOT NULL DEFAULT '',
   `acctstartdelay` int(12) DEFAULT NULL,
   `acctstopdelay` int(12) DEFAULT NULL,
   `xascendsessionsvrkey` varchar(10) CHARACTER SET latin1 DEFAULT NULL,
@@ -95,14 +95,11 @@ CREATE TABLE IF NOT EXISTS `radacct` (
   KEY `acctsessiontime` (`acctsessiontime`),
   KEY `acctstarttime` (`acctstarttime`),
   KEY `acctinterval` (`acctinterval`),
-  KEY `acctuniqueid` (`acctuniqueid`),
-  KEY `acctstarttime` (`acctstarttime`),
   KEY `acctstoptime` (`acctstoptime`),
   KEY `nasipaddress` (`nasipaddress`),
   KEY `callingstationid` (`callingstationid`),
   KEY `calledstationid` (`calledstationid`)
-) ENGINE=ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
@@ -404,25 +401,6 @@ INSERT INTO `tbl_dil` (`DilID`, `Dil`, `Aciklama`) VALUES
 	(7, 'RU', NULL);
 /*!40000 ALTER TABLE `tbl_dil` ENABLE KEYS */;
 
--- Veri çıktısı seçilmemişti
--- tablo yapısı dökülüyor boxnet.tbl_facebook
-CREATE TABLE IF NOT EXISTS `tbl_facebook` (
-  `UyeID` int(11) NOT NULL AUTO_INCREMENT,
-  `ProfilID` int(11) DEFAULT NULL,
-  `KullaniciAdi` varchar(50) COLLATE utf8_bin DEFAULT NULL,
-  `Sifre` varchar(50) COLLATE utf8_bin DEFAULT NULL,
-  `email` varchar(50) COLLATE utf8_bin DEFAULT NULL,
-  `oauth_provider` enum('','facebook','google','twitter') COLLATE utf8_bin DEFAULT NULL,
-  `oauth_uid` varchar(50) COLLATE utf8_bin DEFAULT NULL,
-  `AdSoyad` varchar(50) CHARACTER SET utf8 COLLATE utf8_turkish_ci DEFAULT NULL,
-  `Tarih` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `picture` varchar(500) COLLATE utf8_bin DEFAULT NULL,
-  PRIMARY KEY (`UyeID`),
-  UNIQUE KEY `KullaniciAdi` (`KullaniciAdi`),
-  KEY `FK_tbl_facebook_tbl_profil` (`ProfilID`),
-  CONSTRAINT `FK_tbl_facebook_tbl_profil` FOREIGN KEY (`ProfilID`) REFERENCES `tbl_profil` (`ProfilID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
 -- tablo yapısı dökülüyor boxnet.tbl_kullanici
 CREATE TABLE IF NOT EXISTS `tbl_kullanici` (
   `KullaniciID` int(10) NOT NULL AUTO_INCREMENT,
@@ -442,7 +420,6 @@ INSERT INTO `tbl_kullanici` (`KullaniciID`, `AdSoyad`, `Telefon`, `Mail`, `Kulla
 	(7, 'Boxnet Standart', '0 216 970 06 44', 'info@simyacibilisim.com', 'boxnet', 'B0xn3t', '2014-10-17 01:09:05');
 /*!40000 ALTER TABLE `tbl_kullanici` ENABLE KEYS */;
 
-
 -- tablo yapısı dökülüyor boxnet.tbl_kullanici_yetki
 CREATE TABLE IF NOT EXISTS `tbl_kullanici_yetki` (
   `KullaniciID` int(11) DEFAULT NULL,
@@ -457,63 +434,6 @@ CREATE TABLE IF NOT EXISTS `tbl_kullanici_yetki` (
   CONSTRAINT `FK__tbl_yetki` FOREIGN KEY (`Yetki`) REFERENCES `tbl_yetki` (`Yetki`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Dumping data for table boxnet.tbl_kullanici_yetki: ~34 rows (yaklaşık)
-/*!40000 ALTER TABLE `tbl_kullanici_yetki` DISABLE KEYS */;
-INSERT INTO `tbl_kullanici_yetki` (`KullaniciID`, `Yetki`, `Yeni`, `Duzenle`, `Sil`) VALUES
-	(7, 'gunlukler_hesap_hareketleri', NULL, NULL, NULL),
-	(7, 'gunlukler_hesap_gunlukleri', NULL, NULL, NULL),
-	(7, 'gunlukler_sms_gunlukleri', NULL, NULL, NULL),
-	(7, 'hesap_yonetimi_biletler', NULL, NULL, NULL),
-	(7, 'hesap_yonetimi_gruplar', NULL, NULL, NULL),
-	(7, 'hesap_yonetimi_hesaplar', NULL, NULL, NULL),
-	(7, 'hesap_yonetimi_yeni_hesap', NULL, NULL, NULL),
-	(7, 'hizmet_portali_gelen_mesajlar', NULL, NULL, NULL),
-	(7, 'raporlar', NULL, NULL, NULL),
-	(7, 'sistem_yonetimi_toplu_mail', NULL, NULL, NULL),
-	(7, 'sistem_yonetimi_toplu_sms', NULL, NULL, NULL),
-	(6, 'gunlukler_5651_gunlukleri', NULL, NULL, NULL),
-	(6, 'gunlukler_hesap_hareketleri', NULL, NULL, NULL),
-	(6, 'gunlukler_hesap_gunlukleri', NULL, NULL, NULL),
-	(6, 'gunlukler_sms_gunlukleri', NULL, NULL, NULL),
-	(6, 'hesap_yonetimi_biletler', NULL, NULL, NULL),
-	(6, 'hesap_yonetimi_gruplar', NULL, NULL, NULL),
-	(6, 'hesap_yonetimi_hesaplar', NULL, NULL, NULL),
-	(6, 'hesap_yonetimi_yeni_hesap', NULL, NULL, NULL),
-	(6, 'hizmet_portali_dil_ayari', NULL, NULL, NULL),
-	(6, 'hizmet_portali_gelen_mesajlar', NULL, NULL, NULL),
-	(6, 'hizmet_portali_yukleme_merkezi', NULL, NULL, NULL),
-	(6, 'profil_yonetimi_profiller', NULL, NULL, NULL),
-	(6, 'profil_yonetimi_yeni_profil', NULL, NULL, NULL),
-	(6, 'raporlar', NULL, NULL, NULL),
-	(6, 'sistem_yonetimi_entegrasyon_ayari', NULL, NULL, NULL),
-	(6, 'sistem_yonetimi_hotspot_yonetimi', NULL, NULL, NULL),
-	(6, 'sistem_yonetimi_mail_sms_ayarlari', NULL, NULL, NULL),
-	(6, 'sistem_yonetimi_nas_yonetimi', NULL, NULL, NULL),
-	(6, 'sistem_yonetimi_sms_api', NULL, NULL, NULL),
-	(6, 'sistem_yonetimi_toplu_mail', NULL, NULL, NULL),
-	(6, 'sistem_yonetimi_toplu_sms', NULL, NULL, NULL),
-	(6, 'sistem_yonetimi_yedekleme', NULL, NULL, NULL),
-	(6, 'sistem_yonetimi_kullanici_yonetimi', NULL, NULL, NULL);
-/*!40000 ALTER TABLE `tbl_kullanici_yetki` ENABLE KEYS */;
-
-
--- tablo yapısı dökülüyor boxnet.tbl_kurumsal
-CREATE TABLE IF NOT EXISTS `tbl_kurumsal` (
-  `UyeID` int(11) NOT NULL AUTO_INCREMENT,
-  `ProfilID` int(11) DEFAULT NULL,
-  `KullaniciAdi` varchar(50) COLLATE utf8_bin DEFAULT NULL,
-  `Sifre` varchar(50) COLLATE utf8_bin DEFAULT NULL,
-  `AdSoyad` varchar(50) COLLATE utf8_bin DEFAULT NULL,
-  `Tarih` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`UyeID`),
-  UNIQUE KEY `KullaniciAdi` (`KullaniciAdi`),
-  KEY `FK_tbl_kurumsal_tbl_profil` (`ProfilID`),
-  CONSTRAINT `FK_tbl_kurumsal_tbl_profil` FOREIGN KEY (`ProfilID`) REFERENCES `tbl_profil` (`ProfilID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- Dumping data for table boxnet.tbl_kurumsal: ~0 rows (yaklaşık)
-/*!40000 ALTER TABLE `tbl_kurumsal` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tbl_kurumsal` ENABLE KEYS */;
 
 
 -- tablo yapısı dökülüyor boxnet.tbl_macban
@@ -821,6 +741,63 @@ INSERT INTO `tbl_yetki` (`Yetki`, `Aciklama`) VALUES
 	('sistem_yonetimi_sms_api', 'sistem yonetimi > sms api');
 /*!40000 ALTER TABLE `tbl_yetki` ENABLE KEYS */;
 
+-- Dumping data for table boxnet.tbl_kullanici_yetki: ~34 rows (yaklaşık)
+/*!40000 ALTER TABLE `tbl_kullanici_yetki` DISABLE KEYS */;
+INSERT INTO `tbl_kullanici_yetki` (`KullaniciID`, `Yetki`, `Yeni`, `Duzenle`, `Sil`) VALUES
+	(7, 'gunlukler_hesap_hareketleri', NULL, NULL, NULL),
+	(7, 'gunlukler_hesap_gunlukleri', NULL, NULL, NULL),
+	(7, 'gunlukler_sms_gunlukleri', NULL, NULL, NULL),
+	(7, 'hesap_yonetimi_biletler', NULL, NULL, NULL),
+	(7, 'hesap_yonetimi_gruplar', NULL, NULL, NULL),
+	(7, 'hesap_yonetimi_hesaplar', NULL, NULL, NULL),
+	(7, 'hesap_yonetimi_yeni_hesap', NULL, NULL, NULL),
+	(7, 'hizmet_portali_gelen_mesajlar', NULL, NULL, NULL),
+	(7, 'raporlar', NULL, NULL, NULL),
+	(7, 'sistem_yonetimi_toplu_mail', NULL, NULL, NULL),
+	(7, 'sistem_yonetimi_toplu_sms', NULL, NULL, NULL),
+	(6, 'gunlukler_5651_gunlukleri', NULL, NULL, NULL),
+	(6, 'gunlukler_hesap_hareketleri', NULL, NULL, NULL),
+	(6, 'gunlukler_hesap_gunlukleri', NULL, NULL, NULL),
+	(6, 'gunlukler_sms_gunlukleri', NULL, NULL, NULL),
+	(6, 'hesap_yonetimi_biletler', NULL, NULL, NULL),
+	(6, 'hesap_yonetimi_gruplar', NULL, NULL, NULL),
+	(6, 'hesap_yonetimi_hesaplar', NULL, NULL, NULL),
+	(6, 'hesap_yonetimi_yeni_hesap', NULL, NULL, NULL),
+	(6, 'hizmet_portali_dil_ayari', NULL, NULL, NULL),
+	(6, 'hizmet_portali_gelen_mesajlar', NULL, NULL, NULL),
+	(6, 'hizmet_portali_yukleme_merkezi', NULL, NULL, NULL),
+	(6, 'profil_yonetimi_profiller', NULL, NULL, NULL),
+	(6, 'profil_yonetimi_yeni_profil', NULL, NULL, NULL),
+	(6, 'raporlar', NULL, NULL, NULL),
+	(6, 'sistem_yonetimi_entegrasyon_ayari', NULL, NULL, NULL),
+	(6, 'sistem_yonetimi_hotspot_yonetimi', NULL, NULL, NULL),
+	(6, 'sistem_yonetimi_mail_sms_ayarlari', NULL, NULL, NULL),
+	(6, 'sistem_yonetimi_nas_yonetimi', NULL, NULL, NULL),
+	(6, 'sistem_yonetimi_sms_api', NULL, NULL, NULL),
+	(6, 'sistem_yonetimi_toplu_mail', NULL, NULL, NULL),
+	(6, 'sistem_yonetimi_toplu_sms', NULL, NULL, NULL),
+	(6, 'sistem_yonetimi_yedekleme', NULL, NULL, NULL),
+	(6, 'sistem_yonetimi_kullanici_yonetimi', NULL, NULL, NULL);
+/*!40000 ALTER TABLE `tbl_kullanici_yetki` ENABLE KEYS */;
+
+
+-- tablo yapısı dökülüyor boxnet.tbl_kurumsal
+CREATE TABLE IF NOT EXISTS `tbl_kurumsal` (
+  `UyeID` int(11) NOT NULL AUTO_INCREMENT,
+  `ProfilID` int(11) DEFAULT NULL,
+  `KullaniciAdi` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `Sifre` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `AdSoyad` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `Tarih` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`UyeID`),
+  UNIQUE KEY `KullaniciAdi` (`KullaniciAdi`),
+  KEY `FK_tbl_kurumsal_tbl_profil` (`ProfilID`),
+  CONSTRAINT `FK_tbl_kurumsal_tbl_profil` FOREIGN KEY (`ProfilID`) REFERENCES `tbl_profil` (`ProfilID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- Dumping data for table boxnet.tbl_kurumsal: ~0 rows (yaklaşık)
+/*!40000 ALTER TABLE `tbl_kurumsal` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_kurumsal` ENABLE KEYS */;
 
 -- görünüm yapısı dökülüyor boxnet.vw_groupkullanicidownload
 -- VIEW bağımlılık sorunlarını çözmek için geçici tablolar oluşturuluyor
