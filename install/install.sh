@@ -105,11 +105,11 @@ _selectLanguage() {
     QH_LANG="${QH_LANG:-$QH_LANG_DEFAULT}"
     case "${QH_LANG}" in
             [eE][nN])
-            fetch https://raw.githubusercontent.com/devbdo/demo/master/usr/local/boxnet/install/lang_en.inc
+            fetch https://raw.githubusercontent.com/devbdo/demo/master/install/lang_en.inc
             . lang_en.inc
             ;;
             [tT][rR])
-            fetch https://raw.githubusercontent.com/devbdo/demo/master/usr/local/boxnet/install/lang_tr.inc
+            fetch https://raw.githubusercontent.com/devbdo/demo/master/install/lang_tr.inc
             . lang_tr.inc
             ;;
     esac
@@ -222,8 +222,10 @@ fi
 
 _cloneQHotspot() {
     echo -n ${L_CLONEQHOTSPOT} 1>&3
-    cd ..
-    git clone https://github.com/devbdo/demo.git 
+    cd /usr/local
+    git clone https://github.com/devbdo/demo.git  boxnet
+    cd /usr/local/boxnet
+    cd /usr/local/boxnet/install
     echo ${L_OK} 1>&3
 }
 
