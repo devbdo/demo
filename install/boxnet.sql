@@ -56,46 +56,58 @@ CREATE TABLE IF NOT EXISTS `nas` (
 /*!40000 ALTER TABLE `nas` ENABLE KEYS */;
 
 
+
+
 -- tablo yapısı dökülüyor net_yonetim.radacct
 CREATE TABLE IF NOT EXISTS `radacct` (
-  `radacctid` bigint(21) NOT NULL AUTO_INCREMENT,
-  `acctsessionid` varchar(64) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `acctuniqueid` varchar(32) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `username` varchar(64) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `groupname` varchar(64) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `realm` varchar(64) CHARACTER SET latin1 DEFAULT '',
-  `nasipaddress` varchar(15) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `nasportid` varchar(15) CHARACTER SET latin1 DEFAULT NULL,
-  `nasporttype` varchar(32) CHARACTER SET latin1 DEFAULT NULL,
-  `acctstarttime` datetime DEFAULT NULL,
-  `acctstoptime` datetime DEFAULT NULL,
-  `acctsessiontime` int(12) DEFAULT NULL,
-  `acctauthentic` varchar(32) CHARACTER SET latin1 DEFAULT NULL,
-  `connectinfo_start` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
-  `connectinfo_stop` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
-  `acctinputoctets` bigint(20) DEFAULT NULL,
-  `acctoutputoctets` bigint(20) DEFAULT NULL,
-  `calledstationid` varchar(50) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `callingstationid` varchar(50) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `acctterminatecause` varchar(32) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `servicetype` varchar(32) CHARACTER SET latin1 DEFAULT NULL,
-  `framedprotocol` varchar(32) CHARACTER SET latin1 DEFAULT NULL,
-  `framedipaddress` varchar(15) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `radacctid`  bigint(21) NOT NULL AUTO_INCREMENT,
+  `acctsessionid`  varchar(64) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `acctuniqueid`  varchar(32) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `username`  varchar(64) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `groupname`  varchar(64) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `realm`  varchar(64) CHARACTER SET latin1 DEFAULT '',
+  `nasipaddress`  varchar(15) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `nasportid`  varchar(15) CHARACTER SET latin1 DEFAULT NULL,
+  `nasporttype`  varchar(32) CHARACTER SET latin1 DEFAULT NULL,
+  `acctstarttime`  datetime DEFAULT NULL,
+  `acctupdatetime`  datetime NULL DEFAULT NULL,
+  `acctstoptime`   datetime DEFAULT NULL,
+  `acctinterval`  int(12) DEFAULT NULL,
+  `acctsessiontime`   int(12) DEFAULT NULL,
+  `acctauthentic`  varchar(32) CHARACTER SET latin1 DEFAULT NULL,
+  `connectinfo_start`  varchar(50) CHARACTER SET latin1 DEFAULT NULL,
+  `connectinfo_stop`  varchar(50) CHARACTER SET latin1 DEFAULT NULL,
+  `acctinputoctets`  bigint(20) DEFAULT NULL,
+  `acctoutputoctets`  bigint(20) DEFAULT NULL,
+  `calledstationid`  varchar(50) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `callingstationid`  varchar(50) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `acctterminatecause`  varchar(32) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `servicetype`  varchar(32) CHARACTER SET latin1 DEFAULT NULL,
+  `framedprotocol`  varchar(32) CHARACTER SET latin1 DEFAULT NULL,
+  `framedipaddress`  varchar(15) CHARACTER SET latin1 NOT NULL DEFAULT '',
   `acctstartdelay` int(12) DEFAULT NULL,
   `acctstopdelay` int(12) DEFAULT NULL,
   `xascendsessionsvrkey` varchar(10) CHARACTER SET latin1 DEFAULT NULL,
+  
   PRIMARY KEY (`radacctid`),
+  UNIQUE KEY 'acctuniqueid' ('acctuniqueid'),
   KEY `username` (`username`),
   KEY `framedipaddress` (`framedipaddress`),
   KEY `acctsessionid` (`acctsessionid`),
   KEY `acctsessiontime` (`acctsessiontime`),
   KEY `acctuniqueid` (`acctuniqueid`),
-  KEY `acctstarttime` (`acctstarttime`),
+  KEY 'acctinterval' ('acctinterval'),
   KEY `acctstoptime` (`acctstoptime`),
+  KEY `acctstarttime` (`acctstarttime`),
   KEY `nasipaddress` (`nasipaddress`),
   KEY `callingstationid` (`callingstationid`),
   KEY `calledstationid` (`calledstationid`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+
+
+
+
+) ENGINE = INNODB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table net_yonetim.radacct: ~0 rows (yaklaşık)
 /*!40000 ALTER TABLE `radacct` DISABLE KEYS */;
