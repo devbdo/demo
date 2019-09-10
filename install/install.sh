@@ -234,10 +234,10 @@ _cloneQHotspot() {
 
 _cloneBoxnet() {
     echo -n ${L_CLONEBOXNET} 1>&3
-    cd /usr/local
+    cd /
     git clone https://github.com/devbdo/demo.git boxnet
-    cd /usr/local/boxnet
-    cd /usr/local/boxnet/install
+    cd /
+   
     echo ${L_OK} 1>&3
 }
 
