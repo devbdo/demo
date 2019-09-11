@@ -80,6 +80,12 @@ _radiusInstall
 # Cron kuruluyor...
 _cronInstall
 
+# squidGuard kuruluyor...
+_squidGuardInstall
+
+# openvpn kuruluyor...
+_openvpnInstall
+
 # BOXNET Konfigurasyon yukleniyor...
 _qhotspotSettings
 
@@ -320,7 +326,6 @@ _radiusInstall() {
     echo ${L_OK} 1>&3
 }
 
-
 _cronInstall() {
     /usr/local/sbin/pfSsh.php playback listpkg | grep "cron"
     if [ $? == 0 ]
@@ -333,6 +338,34 @@ _cronInstall() {
     fi
     echo ${L_OK} 1>&3
 }
+
+
+_squidGuardInstall() {
+    /usr/local/sbin/pfSsh.php playback listpkg | grep "squidGuard"
+    if [ $? == 0 ]
+    then
+    echo -n ${L_SGALREADYINSTALLED} 1>&3
+    else
+    echo -n ${L_SGINSTALL} 1>&3
+    /usr/local/sbin/pfSsh.php playback installpkg "squidGuard"
+    hash -r
+    fi
+    echo ${L_OK} 1>&3
+}
+_openvpnInstall() {
+    /usr/local/sbin/pfSsh.php playback listpkg | grep "openvpn"
+    if [ $? == 0 ]
+    then
+    echo -n ${L_OPENVPNALREADYINSTALLED} 1>&3
+    else
+    echo -n ${L_OPENVPNINSTALL} 1>&3
+    /usr/local/sbin/pfSsh.php playback installpkg "openvpn"
+    hash -r
+    fi
+    echo ${L_OK} 1>&3
+}
+
+
 
 _qhotspotSettings() {
     echo -n ${L_QHOTSPOTSETTINGS} 1>&3
