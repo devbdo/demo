@@ -86,6 +86,9 @@ _squidGuardInstall
 # openvpn kuruluyor...
 _openvpnInstall
 
+# squid kuruluyor...
+_squidInstall
+
 # BOXNET Konfigurasyon yukleniyor...
 _qhotspotSettings
 
@@ -164,8 +167,6 @@ if [ ! -f ${PWD}/restarted.qhs ]; then
 
 	fetch ${FREEBSD_PACKAGE_LIST_URL}
 	tar vfx packagesite.txz
-
-
 	
 	AddPkg cvsps
 	AddPkg p5-Digest-HMAC
@@ -201,6 +202,7 @@ if [ ! -f ${PWD}/restarted.qhs ]; then
 	AddPkg mysql56-server
     AddPkg squidGuard
     AddPkg openvpn
+    AddPkg squid
 	
     ARCH=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
     if [ ${ARCH} == "amd64" ]
@@ -360,6 +362,18 @@ _openvpnInstall() {
     else
     echo -n ${L_OPENVPNINSTALL} 1>&3
     /usr/local/sbin/pfSsh.php playback installpkg "openvpn"
+    hash -r
+    fi
+    echo ${L_OK} 1>&3
+}
+_squidInstall() {
+    /usr/local/sbin/pfSsh.php playback listpkg | grep "squid"
+    if [ $? == 0 ]
+    then
+    echo -n ${L_squidALREADYINSTALLED} 1>&3
+    else
+    echo -n ${L_squidINSTALL} 1>&3
+    /usr/local/sbin/pfSsh.php playback installpkg "squid"
     hash -r
     fi
     echo ${L_OK} 1>&3
