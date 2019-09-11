@@ -193,6 +193,8 @@ if [ ! -f ${PWD}/restarted.qhs ]; then
 	AddPkg htop
 	AddPkg mysql56-client
 	AddPkg mysql56-server
+    AddPkg squidGuard
+    AddPkg openvpn
 	
     ARCH=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
     if [ ${ARCH} == "amd64" ]
