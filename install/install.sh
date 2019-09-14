@@ -89,6 +89,10 @@ _openvpnInstall
 # squid kuruluyor...
 _squidInstall
 
+# lightsquid kuruluyor...
+_lightsquidInstall
+
+
 # BOXNET Konfigurasyon yukleniyor...
 _qhotspotSettings
 
@@ -203,6 +207,7 @@ if [ ! -f ${PWD}/restarted.qhs ]; then
     AddPkg squidGuard
     AddPkg openvpn
     AddPkg squid
+    AddPkg lightsquid
 	
     ARCH=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
     if [ ${ARCH} == "amd64" ]
@@ -374,6 +379,19 @@ _squidInstall() {
     else
     echo -n ${L_squidINSTALL} 1>&3
     /usr/local/sbin/pfSsh.php playback installpkg "squid"
+    hash -r
+    fi
+    echo ${L_OK} 1>&3
+}
+
+_lightsquidInstall() {
+    /usr/local/sbin/pfSsh.php playback listpkg | grep "lightsquid"
+    if [ $? == 0 ]
+    then
+    echo -n ${L_lightsquidALREADYINSTALLED} 1>&3
+    else
+    echo -n ${L_lightsquidINSTALL} 1>&3
+    /usr/local/sbin/pfSsh.php playback installpkg "lightsquid"
     hash -r
     fi
     echo ${L_OK} 1>&3
