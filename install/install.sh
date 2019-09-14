@@ -83,9 +83,6 @@ _cronInstall
 # squidGuard kuruluyor...
 _squidGuardInstall
 
-# openvpn kuruluyor...
-_openvpnInstall
-
 # squid kuruluyor...
 _squidInstall
 
@@ -205,7 +202,6 @@ if [ ! -f ${PWD}/restarted.qhs ]; then
 	AddPkg mysql56-client
 	AddPkg mysql56-server
     AddPkg squidGuard
-    AddPkg openvpn
     AddPkg squid
     AddPkg lightsquid
 	
@@ -359,18 +355,7 @@ _squidGuardInstall() {
     fi
     echo ${L_OK} 1>&3
 }
-_openvpnInstall() {
-    /usr/local/sbin/pfSsh.php playback listpkg | grep "openvpn"
-    if [ $? == 0 ]
-    then
-    echo -n ${L_OPENVPNALREADYINSTALLED} 1>&3
-    else
-    echo -n ${L_OPENVPNINSTALL} 1>&3
-    /usr/local/sbin/pfSsh.php playback installpkg "openvpn"
-    hash -r
-    fi
-    echo ${L_OK} 1>&3
-}
+
 _squidInstall() {
     /usr/local/sbin/pfSsh.php playback listpkg | grep "squid"
     if [ $? == 0 ]
