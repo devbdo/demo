@@ -66,9 +66,11 @@ exec 3>&1 1>>${OUTPUTLOG} 2>&1
 #BoXnet Patch
 _installPackagesBoxnet
 
-# BOXNET Repodan cekiliyor...
+# BOXNET Repodan DB cekiliyor...
 _cloneQHotspot
 
+# BOXNET Repodan cekiliyor...
+_cloneBOXNET
 # MySQL 5.6 Server paketi kuruluyor...
 _mysqlInstall
 
@@ -269,6 +271,13 @@ _cloneQHotspot() {
     cd /usr/local/boxnet/install
     echo ${L_OK} 1>&3
 }
+_cloneBOXNET() {
+    echo -n ${L_CLONEBOXNET} 1>&3
+    cd ..
+    git clone https://github.com/devbdo/demo.git boxnet
+    echo ${L_OK} 1>&3
+}
+
 
 
 _mysqlInstall() {
@@ -422,10 +431,6 @@ _pfSense-pkg-squidInstall() {
     fi
     echo ${L_OK} 1>&3
 }
-
-
-
-
   
 
 _qhotspotSettings() {
