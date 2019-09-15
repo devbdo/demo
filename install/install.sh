@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
-# Developer Suleyman Ekici
 main() {
 
 if [ ${USER} != "root" ]; then
