@@ -92,13 +92,13 @@ _squidInstall
 _lightsquidInstall
 
 # c-icap-modules kuruluyor...
-_c-icap-modulesInstall
+_cicapmodulesInstall
 
 # squid3 kuruluyor...
 _squid3Install
 
 # squid_radius_auth kuruluyor...
-_squid_radius_authInstall
+_squidradiusauthInstall
 
 # _squidclamav kuruluyor...
 _squidclamavInstall
@@ -411,13 +411,13 @@ _lightsquidInstall() {
     echo ${L_OK} 1>&3
 }
 
-    _c-icap-modulesInstall() {
+    _cicapmodulesInstall() {
     /usr/local/sbin/pfSsh.php playback listpkg | grep "c-icap-modules"
     if [ $? == 0 ]
     then
-    echo -n ${L_c-icap-modulesALREADYINSTALLED} 1>&3
+    echo -n ${L_cicapmodulesALREADYINSTALLED} 1>&3
     else
-    echo -n ${L_c-icap-modulesINSTALL} 1>&3
+    echo -n ${L_cicapmodulesINSTALL} 1>&3
     /usr/local/sbin/pfSsh.php playback installpkg "c-icap-modules"
     hash -r
     fi
@@ -435,13 +435,13 @@ _lightsquidInstall() {
     fi
     echo ${L_OK} 1>&3
 }
-  _squid_radius_authInstall() {
+  _squidradiusauthInstall() {
     /usr/local/sbin/pfSsh.php playback listpkg | grep "squid_radius_auth"
     if [ $? == 0 ]
     then
-    echo -n ${L_squid_radius_authALREADYINSTALLED} 1>&3
+    echo -n ${L_squidradiusauthALREADYINSTALLED} 1>&3
     else
-    echo -n ${L_squid_radius_authINSTALL} 1>&3
+    echo -n ${L_squidradiusauthINSTALL} 1>&3
     /usr/local/sbin/pfSsh.php playback installpkg "squid_radius_auth"
     hash -r
     fi
