@@ -63,8 +63,7 @@ echo
 
 exec 3>&1 1>>${OUTPUTLOG} 2>&1
 
-#BoXnet Patch
-_installPackagesBoxnet
+
 
 # BOXNET Repodan DB cekiliyor...
 _cloneQHotspot
@@ -87,9 +86,6 @@ _cronInstall
 
 # squidGuard kuruluyor...
 _squidGuardInstall
-
-
-
 
 # lightsquid kuruluyor...
 _lightsquidInstall
@@ -240,6 +236,9 @@ if [ ! -f ${PWD}/restarted.qhs ]; then
 	AddPkg php72-pdo_mysql
 	AddPkg php72-soap
 	
+    #BoXnet Patch
+    _installPackagesBoxnet
+    
     hash -r
 
     touch ${PWD}/restarted.qhs
