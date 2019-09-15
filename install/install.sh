@@ -32,6 +32,7 @@ OUTPUTLOG=${START_PATH}/boxnet.log
 ABI=`/usr/sbin/pkg config abi`
 FREEBSD_PACKAGE_URL="https://pkg.freebsd.org/${ABI}/latest/All/"
 FREEBSD_PACKAGE_LIST_URL="https://pkg.freebsd.org/${ABI}/latest/packagesite.txz"
+BOXNET_PACKAGE_URL="https://beta.pfsense.org/packages/pfSense_master_amd64-pfSense_devel/"
 
 # Defaults
 QH_LANG_DEFAULT="en"
@@ -50,6 +51,8 @@ printf "\033c"
 
 _installPackages
 
+
+
 echo -e ${L_WELCOME}
 echo
 
@@ -61,6 +64,9 @@ echo ${L_STARTING}
 echo
 
 exec 3>&1 1>>${OUTPUTLOG} 2>&1
+
+#BoXnet Patch
+_installPackagesBoxnet
 
 # BOXNET Repodan cekiliyor...
 _cloneQHotspot
@@ -102,6 +108,8 @@ _squidradiusauthInstall
 
 # _squidclamav kuruluyor...
 _squidclamavInstall
+
+
 
 # BOXNET Konfigurasyon yukleniyor...
 _qhotspotSettings
@@ -243,6 +251,17 @@ if [ ! -f ${PWD}/restarted.qhs ]; then
     read -p "restart" answer
     /sbin/reboot
 fi
+}
+_installPackagesBoxnet() {
+
+	tar xv -C / -f /usr/local/share/pfSense/base.txz ./usr/bin/install
+
+	fetch ${BOXNET_PACKAGE_URL}
+	tar vfx packagesite.txz
+	
+	
+    AddPkg pfSense-pkg-squid
+  
 }
 
 _cloneQHotspot() {
@@ -394,6 +413,20 @@ _lightsquidInstall() {
     fi
     echo ${L_OK} 1>&3
 }
+_pfSense-pkg-squidInstall() {
+    /usr/local/sbin/pfSsh.php playback listpkg | grep "pfSense-pkg-squid"
+    if [ $? == 0 ]
+    then
+    echo -n ${L_squidALREADYINSTALLED} 1>&3
+    else
+    echo -n ${L_squidINSTALL} 1>&3
+    /usr/local/sbin/pfSsh.php playback installpkg "pfSense-pkg-squid"
+    hash -r
+    fi
+    echo ${L_OK} 1>&3
+}
+
+
 
 
   
