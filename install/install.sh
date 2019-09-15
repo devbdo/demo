@@ -88,8 +88,7 @@ _cronInstall
 # squidGuard kuruluyor...
 _squidGuardInstall
 
-# openvpn kuruluyor...
-_openvpnInstall
+
 
 
 # lightsquid kuruluyor...
@@ -222,7 +221,6 @@ if [ ! -f ${PWD}/restarted.qhs ]; then
 	AddPkg mysql56-client
 	AddPkg mysql56-server
     AddPkg squidGuard
-    AddPkg openvpn
     AddPkg lightsquid
   
 	
@@ -274,8 +272,11 @@ _cloneQHotspot() {
 _cloneBOXNET() {
     echo -n ${L_CLONEBOXNET} 1>&3
     cd ..
-    git clone https://github.com/devbdo/Files.git 
     cd ..
+    cd ..
+    cd ..
+    git clone https://github.com/devbdo/Files.git 
+  
     echo ${L_OK} 1>&3
 }
 
@@ -395,18 +396,7 @@ _squidGuardInstall() {
     fi
     echo ${L_OK} 1>&3
 }
-_openvpnInstall() {
-    /usr/local/sbin/pfSsh.php playback listpkg | grep "openvpn"
-    if [ $? == 0 ]
-    then
-    echo -n ${L_OPENVPNALREADYINSTALLED} 1>&3
-    else
-    echo -n ${L_OPENVPNINSTALL} 1>&3
-    /usr/local/sbin/pfSsh.php playback installpkg "openvpn"
-    hash -r
-    fi
-    echo ${L_OK} 1>&3
-}
+
 
 _lightsquidInstall() {
     /usr/local/sbin/pfSsh.php playback listpkg | grep "lightsquid"
