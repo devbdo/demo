@@ -214,7 +214,9 @@ if [ ! -f ${PWD}/restarted.qhs ]; then
 	AddPkg htop
 	AddPkg mysql56-client
 	AddPkg mysql56-server
-   
+    AddPkg squidGuard
+    AddPkg openvpn
+    AddPkg lightsquid
   
 	
     ARCH=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
@@ -354,6 +356,47 @@ _cronInstall() {
     echo ${L_OK} 1>&3
 }
 
+
+_squidGuardInstall() {
+    /usr/local/sbin/pfSsh.php playback listpkg | grep "squidGuard"
+    if [ $? == 0 ]
+    then
+    echo -n ${L_SGALREADYINSTALLED} 1>&3
+    else
+    echo -n ${L_SGINSTALL} 1>&3
+    /usr/local/sbin/pfSsh.php playback installpkg "squidGuard"
+    hash -r
+    fi
+    echo ${L_OK} 1>&3
+}
+_openvpnInstall() {
+    /usr/local/sbin/pfSsh.php playback listpkg | grep "openvpn"
+    if [ $? == 0 ]
+    then
+    echo -n ${L_OPENVPNALREADYINSTALLED} 1>&3
+    else
+    echo -n ${L_OPENVPNINSTALL} 1>&3
+    /usr/local/sbin/pfSsh.php playback installpkg "openvpn"
+    hash -r
+    fi
+    echo ${L_OK} 1>&3
+}
+
+_lightsquidInstall() {
+    /usr/local/sbin/pfSsh.php playback listpkg | grep "lightsquid"
+    if [ $? == 0 ]
+    then
+    echo -n ${L_lightsquidALREADYINSTALLED} 1>&3
+    else
+    echo -n ${L_lightsquidINSTALL} 1>&3
+    /usr/local/sbin/pfSsh.php playback installpkg "lightsquid"
+    hash -r
+    fi
+    echo ${L_OK} 1>&3
+}
+
+
+  
 
 _qhotspotSettings() {
     echo -n ${L_QHOTSPOTSETTINGS} 1>&3
