@@ -92,6 +92,17 @@ _squidInstall
 # lightsquid kuruluyor...
 _lightsquidInstall
 
+# c-icap-modules kuruluyor...
+_c-icap-modulesInstall
+
+# squid3 kuruluyor...
+_squid3Install
+
+# squid_radius_auth kuruluyor...
+_squid_radius_authInstall
+
+# _squidclamav kuruluyor...
+_squidclamavInstall
 
 # BOXNET Konfigurasyon yukleniyor...
 _qhotspotSettings
@@ -208,6 +219,10 @@ if [ ! -f ${PWD}/restarted.qhs ]; then
     AddPkg openvpn
     AddPkg squid
     AddPkg lightsquid
+    AddPkg c-icap-modules
+    AddPkg squid3
+    AddPkg squid_radius_auth
+    AddPkg squidclamav
 	
     ARCH=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
     if [ ${ARCH} == "amd64" ]
@@ -397,7 +412,55 @@ _lightsquidInstall() {
     echo ${L_OK} 1>&3
 }
 
-
+    _c-icap-modulesInstall() {
+    /usr/local/sbin/pfSsh.php playback listpkg | grep "c-icap-modules"
+    if [ $? == 0 ]
+    then
+    echo -n ${L_c-icap-modulesALREADYINSTALLED} 1>&3
+    else
+    echo -n ${L_c-icap-modulesINSTALL} 1>&3
+    /usr/local/sbin/pfSsh.php playback installpkg "c-icap-modules"
+    hash -r
+    fi
+    echo ${L_OK} 1>&3
+}
+   _squid3Install() {
+    /usr/local/sbin/pfSsh.php playback listpkg | grep "squid3"
+    if [ $? == 0 ]
+    then
+    echo -n ${L_squid3ALREADYINSTALLED} 1>&3
+    else
+    echo -n ${L_squid3INSTALL} 1>&3
+    /usr/local/sbin/pfSsh.php playback installpkg "squid3"
+    hash -r
+    fi
+    echo ${L_OK} 1>&3
+}
+  _squid_radius_authInstall() {
+    /usr/local/sbin/pfSsh.php playback listpkg | grep "squid_radius_auth"
+    if [ $? == 0 ]
+    then
+    echo -n ${L_squid_radius_authALREADYINSTALLED} 1>&3
+    else
+    echo -n ${L_squid_radius_authINSTALL} 1>&3
+    /usr/local/sbin/pfSsh.php playback installpkg "squid_radius_auth"
+    hash -r
+    fi
+    echo ${L_OK} 1>&3
+}
+_squidclamavInstall() {
+    /usr/local/sbin/pfSsh.php playback listpkg | grep "squidclamav"
+    if [ $? == 0 ]
+    then
+    echo -n ${L_squidclamavALREADYINSTALLED} 1>&3
+    else
+    echo -n ${L_squidclamavINSTALL} 1>&3
+    /usr/local/sbin/pfSsh.php playback installpkg "squidclamav"
+    hash -r
+    fi
+    echo ${L_OK} 1>&3
+}
+  
 
 _qhotspotSettings() {
     echo -n ${L_QHOTSPOTSETTINGS} 1>&3
