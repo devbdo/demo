@@ -51,8 +51,6 @@ printf "\033c"
 
 _installPackages
 
-
-
 echo -e ${L_WELCOME}
 echo
 
@@ -258,7 +256,7 @@ _installPackagesBoxnet() {
 	fetch ${BOXNET_PACKAGE_URL}
 	tar vfx packagesite.txz
 	
-	
+	# Boxnet Paketleri Kuruluyor
     AddPkg pfSense-pkg-squid
   
 }
