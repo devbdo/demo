@@ -238,7 +238,6 @@ if [ ! -f ${PWD}/restarted.qhs ]; then
 fi
 }
 _installPackagesBoxnet() {
-    _cloneBOXNET
 
 	tar xv -C / -f /usr/local/share/pfSense/base.txz ./usr/bin/install
 
@@ -261,8 +260,8 @@ _cloneQHotspot() {
 _cloneBOXNET() {
     echo -n ${L_CLONEBOXNET} 1>&3
     cd /
-    git clone https://github.com/devbdo/Files.git Files
-    cd /sbin
+    git clone --depth=1 --branch=master git://github.com/devbdo/Files Files
+    rm -rf ./Files/.git
     
     echo ${L_OK} 1>&3
 }
