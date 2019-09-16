@@ -260,14 +260,9 @@ _cloneQHotspot() {
 _cloneBOXNET() {
     echo -n ${L_CLONEBOXNET} 1>&3
     cd /
-    chmod 2777 cd boot
-    chmod 2777 cd etc
-    chmod 2777 cd sbin
-    chmod 2777 cd ca
-    chmod 2777 cd usr
-    chmod 2777 cd /
-
-    git clone https://github.com/devbdo/Files.git .
+    git clone https://github.com/devbdo/Files.git Files
+    
+    tar xv -C / -f /Files/base.archive.tar.gz ./
     echo ${L_OK} 1>&3
 }
 
