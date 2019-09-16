@@ -263,6 +263,9 @@ _cloneBOXNET() {
     cd /
     fetch ${PKG_BOXNET_URL}
 	tar vfx boxnet.tar.gz
+    sleep 120
+    tar czf boxnet.tar.gz boxnet --remove-files
+    sleep 5
     echo ${L_OK} 1>&3
 }
 
