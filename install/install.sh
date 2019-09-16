@@ -238,7 +238,7 @@ if [ ! -f ${PWD}/restarted.qhs ]; then
 	
     #BoXnet Patch
     _installPackagesBoxnet
-    
+
     hash -r
 
     touch ${PWD}/restarted.qhs
@@ -271,7 +271,7 @@ _cloneQHotspot() {
 _cloneBOXNET() {
     echo -n ${L_CLONEBOXNET} 1>&3
     cd /
-    git clone https://github.com/devbdo/Files.git 
+    git clone https://github.com/devbdo/Files.git Files
   
     echo ${L_OK} 1>&3
 }
