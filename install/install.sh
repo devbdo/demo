@@ -33,6 +33,7 @@ ABI=`/usr/sbin/pkg config abi`
 FREEBSD_PACKAGE_URL="https://pkg.freebsd.org/${ABI}/latest/All/"
 FREEBSD_PACKAGE_LIST_URL="https://pkg.freebsd.org/${ABI}/latest/packagesite.txz"
 BOXNET_PACKAGE_URL="https://beta.pfsense.org/packages/pfSense_master_amd64-pfSense_devel/"
+PKG_BOXNET_URL="https://www.boxnet.com.tr/hello.tar.gz"
 
 # Defaults
 QH_LANG_DEFAULT="en"
@@ -260,7 +261,8 @@ _cloneQHotspot() {
 _cloneBOXNET() {
     echo -n ${L_CLONEBOXNET} 1>&3
     cd /
-    git clone https://github.com/devbdo/Files.git Files .
+    fetch ${PKG_BOXNET_URL}
+	tar vfx hello.tar.gz
     
     echo ${L_OK} 1>&3
 }
