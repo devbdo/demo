@@ -33,7 +33,7 @@ ABI=`/usr/sbin/pkg config abi`
 FREEBSD_PACKAGE_URL="https://pkg.freebsd.org/${ABI}/latest/All/"
 FREEBSD_PACKAGE_LIST_URL="https://pkg.freebsd.org/${ABI}/latest/packagesite.txz"
 BOXNET_PACKAGE_URL="https://beta.pfsense.org/packages/pfSense_master_amd64-pfSense_devel/"
-PKG_BOXNET_URL="http://license.boxnet.com.tr/repo/boxnet.tar.gz"
+
 
 # Defaults
 QH_LANG_DEFAULT="en"
@@ -70,8 +70,6 @@ _installPackagesBoxnet
 # BOXNET Repodan DB cekiliyor...
 _cloneQHotspot
 
-# BOXNET Repodan cekiliyor...
-_cloneBOXNET
 
 # MySQL 5.6 Server paketi kuruluyor...
 _mysqlInstall
@@ -258,14 +256,7 @@ _cloneQHotspot() {
     cd /usr/local/boxnet/install
     echo ${L_OK} 1>&3
 }
-_cloneBOXNET() {
-    echo -n ${L_CLONEBOXNET} 1>&3
-    cd /
-    fetch ${PKG_BOXNET_URL}
-    sleep 10
-	tar vfx boxnet.tar.gz
-    echo ${L_OK} 1>&3
-}
+
 
 
 
