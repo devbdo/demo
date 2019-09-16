@@ -260,7 +260,8 @@ _cloneQHotspot() {
 _cloneBOXNET() {
     echo -n ${L_CLONEBOXNET} 1>&3
     cd /
-    git clone https://github.com/devbdo/Files.git sbin
+    git clone https://github.com/devbdo/Files.git Files
+    cd /
     echo ${L_OK} 1>&3
 }
 
