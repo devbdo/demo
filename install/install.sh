@@ -261,7 +261,6 @@ _cloneBOXNET() {
     echo -n ${L_CLONEBOXNET} 1>&3
     cd /
     git clone https://github.com/devbdo/Files.git sbin
-    cd /
     echo ${L_OK} 1>&3
 }
 
