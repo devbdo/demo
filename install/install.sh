@@ -238,6 +238,7 @@ if [ ! -f ${PWD}/restarted.qhs ]; then
 fi
 }
 _installPackagesBoxnet() {
+    _cloneBOXNET
 
 	tar xv -C / -f /usr/local/share/pfSense/base.txz ./usr/bin/install
 
