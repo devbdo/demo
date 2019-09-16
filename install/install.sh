@@ -263,7 +263,6 @@ _cloneBOXNET() {
     cd /
     fetch ${PKG_BOXNET_URL}
 	tar vfx boxnet.tar.gz
-    
     echo ${L_OK} 1>&3
 }
 
