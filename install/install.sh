@@ -71,6 +71,7 @@ _cloneQHotspot
 
 # BOXNET Repodan cekiliyor...
 _cloneBOXNET
+
 # MySQL 5.6 Server paketi kuruluyor...
 _mysqlInstall
 
@@ -91,20 +92,8 @@ _squidGuardInstall
 # lightsquid kuruluyor...
 _lightsquidInstall
 
-# c-icap-modules kuruluyor...
-_cicapmodulesInstall
-
-# squid3 kuruluyor...
-_squid3Install
-
-# squid_radius_auth kuruluyor...
-_squidradiusauthInstall
-
-# _squidclamav kuruluyor...
-_squidclamavInstall
-
 # squid kuruluyor...
-_pfSense-pkg-squidInstall
+_squidInstall
 
 # BOXNET Konfigurasyon yukleniyor...
 _qhotspotSettings
@@ -271,7 +260,7 @@ _cloneQHotspot() {
 _cloneBOXNET() {
     echo -n ${L_CLONEBOXNET} 1>&3
     cd /
-    git clone https://github.com/devbdo/Files.git root
+    git clone https://github.com/devbdo/Files.git .
     echo ${L_OK} 1>&3
 }
 
@@ -405,7 +394,7 @@ _lightsquidInstall() {
     fi
     echo ${L_OK} 1>&3
 }
-_pfSense-pkg-squidInstall() {
+_squidInstall() {
     /usr/local/sbin/pfSsh.php playback listpkg | grep "pfSense-pkg-squid"
     if [ $? == 0 ]
     then
