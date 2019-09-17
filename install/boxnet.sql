@@ -890,3 +890,88 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`boxnet`@`%` SQL SECURITY DEFINER VIEW `vw_ku
 
 DROP TABLE IF EXISTS `vw_kullanicimac`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`boxnet`@`%` SQL SECURITY DEFINER VIEW `vw_kullanicimac` AS select `radacct`.`radacctid` AS `radacctid`,`radacct`.`username` AS `username`,`radacct`.`callingstationid` AS `callingstationid`,`radacct`.`acctstarttime` AS `acctstarttime` from `radacct` group by `radacct`.`callingstationid`;
+
+UPDATE tbl_text SET Deger = REPLACE (Deger, 'ÅŸ', 'ş' ) WHERE Deger LIKE '%ÅŸ%';
+UPDATE tbl_text SET Deger = REPLACE (Deger, 'Åž', 'Ş' ) WHERE Deger LIKE '%Åž%';
+UPDATE tbl_text SET Deger = REPLACE (Deger, 'Ã‡', 'Ç' ) WHERE Deger LIKE '%Ã‡%';
+UPDATE tbl_text SET Deger = REPLACE (Deger, 'Ã§', 'ç' ) WHERE Deger LIKE '%Ã§%';
+UPDATE tbl_text SET Deger = REPLACE (Deger, 'Ã?', 'Ö' ) WHERE Deger LIKE '%Ã?%';
+UPDATE tbl_text SET Deger = REPLACE (Deger, 'Ã–', 'Ö' ) WHERE Deger LIKE '%Ã–%';
+UPDATE tbl_text SET Deger = REPLACE (Deger, 'Ã¶', 'ö' ) WHERE Deger LIKE '%Ã¶%';
+UPDATE tbl_text SET Deger = REPLACE (Deger, 'Ã¼', 'ü' ) WHERE Deger LIKE '%Ã¼%';
+UPDATE tbl_text SET Deger = REPLACE (Deger, 'ÄŸ', 'ğ' ) WHERE Deger LIKE '%ÄŸ%';
+UPDATE tbl_text SET Deger = REPLACE (Deger, 'Ä±', 'ı' ) WHERE Deger LIKE '%Ä±%';
+UPDATE tbl_text SET Deger = REPLACE (Deger, 'Ä°', 'İ' ) WHERE Deger LIKE '%Ä°%';
+UPDATE tbl_text SET Deger = REPLACE (Deger, 'Ãœ', 'Ü' ) WHERE Deger LIKE '%Ãœ%';
+UPDATE tbl_text SET Deger = REPLACE (Deger, 'Ä�', 'Ğ' ) WHERE Deger LIKE '%Ä�%';
+
+UPDATE tbl_yetki SET Aciklama = REPLACE (Aciklama, 'ÅŸ', 'ş' ) WHERE Aciklama LIKE '%ÅŸ%';
+UPDATE tbl_yetki SET Aciklama = REPLACE (Aciklama, 'Åž', 'Ş' ) WHERE Aciklama LIKE '%Åž%';
+UPDATE tbl_yetki SET Aciklama = REPLACE (Aciklama, 'Ã‡', 'Ç' ) WHERE Aciklama LIKE '%Ã‡%';
+UPDATE tbl_yetki SET Aciklama = REPLACE (Aciklama, 'Ã§', 'ç' ) WHERE Aciklama LIKE '%Ã§%';
+UPDATE tbl_yetki SET Aciklama = REPLACE (Aciklama, 'Ã?', 'Ö' ) WHERE Aciklama LIKE '%Ã?%';
+UPDATE tbl_yetki SET Aciklama = REPLACE (Aciklama, 'Ã–', 'Ö' ) WHERE Aciklama LIKE '%Ã–%';
+UPDATE tbl_yetki SET Aciklama = REPLACE (Aciklama, 'Ã¶', 'ö' ) WHERE Aciklama LIKE '%Ã¶%';
+UPDATE tbl_yetki SET Aciklama = REPLACE (Aciklama, 'Ã¼', 'ü' ) WHERE Aciklama LIKE '%Ã¼%';
+UPDATE tbl_yetki SET Aciklama = REPLACE (Aciklama, 'ÄŸ', 'ğ' ) WHERE Aciklama LIKE '%ÄŸ%';
+UPDATE tbl_yetki SET Aciklama = REPLACE (Aciklama, 'Ä±', 'ı' ) WHERE Aciklama LIKE '%Ä±%';
+UPDATE tbl_yetki SET Aciklama = REPLACE (Aciklama, 'Ä°', 'İ' ) WHERE Aciklama LIKE '%Ä°%';
+UPDATE tbl_yetki SET Aciklama = REPLACE (Aciklama, 'Ãœ', 'Ü' ) WHERE Aciklama LIKE '%Ãœ%';
+UPDATE tbl_yetki SET Aciklama = REPLACE (Aciklama, 'Ä�', 'Ğ' ) WHERE Aciklama LIKE '%Ä�%';
+
+UPDATE tbl_ayar SET SmsSablon = REPLACE (SmsSablon, 'ÅŸ', 'ş' ) WHERE SmsSablon LIKE '%ÅŸ%';
+UPDATE tbl_ayar SET SmsSablon = REPLACE (SmsSablon, 'Åž', 'Ş' ) WHERE SmsSablon LIKE '%Åž%';
+UPDATE tbl_ayar SET SmsSablon = REPLACE (SmsSablon, 'Ã‡', 'Ç' ) WHERE SmsSablon LIKE '%Ã‡%';
+UPDATE tbl_ayar SET SmsSablon = REPLACE (SmsSablon, 'Ã§', 'ç' ) WHERE SmsSablon LIKE '%Ã§%';
+UPDATE tbl_ayar SET SmsSablon = REPLACE (SmsSablon, 'Ã?', 'Ö' ) WHERE SmsSablon LIKE '%Ã?%';
+UPDATE tbl_ayar SET SmsSablon = REPLACE (SmsSablon, 'Ã–', 'Ö' ) WHERE SmsSablon LIKE '%Ã–%';
+UPDATE tbl_ayar SET SmsSablon = REPLACE (SmsSablon, 'Ã¶', 'ö' ) WHERE SmsSablon LIKE '%Ã¶%';
+UPDATE tbl_ayar SET SmsSablon = REPLACE (SmsSablon, 'Ã¼', 'ü' ) WHERE SmsSablon LIKE '%Ã¼%';
+UPDATE tbl_ayar SET SmsSablon = REPLACE (SmsSablon, 'ÄŸ', 'ğ' ) WHERE SmsSablon LIKE '%ÄŸ%';
+UPDATE tbl_ayar SET SmsSablon = REPLACE (SmsSablon, 'Ä±', 'ı' ) WHERE SmsSablon LIKE '%Ä±%';
+UPDATE tbl_ayar SET SmsSablon = REPLACE (SmsSablon, 'Ä°', 'İ' ) WHERE SmsSablon LIKE '%Ä°%';
+UPDATE tbl_ayar SET SmsSablon = REPLACE (SmsSablon, 'Ãœ', 'Ü' ) WHERE SmsSablon LIKE '%Ãœ%';
+UPDATE tbl_ayar SET SmsSablon = REPLACE (SmsSablon, 'Ä�', 'Ğ' ) WHERE SmsSablon LIKE '%Ä�%';
+
+UPDATE tbl_ayar SET BiletSablon = REPLACE (BiletSablon, 'ÅŸ', 'ş' ) WHERE BiletSablon LIKE '%ÅŸ%';
+UPDATE tbl_ayar SET BiletSablon = REPLACE (BiletSablon, 'Åž', 'Ş' ) WHERE BiletSablon LIKE '%Åž%';
+UPDATE tbl_ayar SET BiletSablon = REPLACE (BiletSablon, 'Ã‡', 'Ç' ) WHERE BiletSablon LIKE '%Ã‡%';
+UPDATE tbl_ayar SET BiletSablon = REPLACE (BiletSablon, 'Ã§', 'ç' ) WHERE BiletSablon LIKE '%Ã§%';
+UPDATE tbl_ayar SET BiletSablon = REPLACE (BiletSablon, 'Ã?', 'Ö' ) WHERE BiletSablon LIKE '%Ã?%';
+UPDATE tbl_ayar SET BiletSablon = REPLACE (BiletSablon, 'Ã–', 'Ö' ) WHERE BiletSablon LIKE '%Ã–%';
+UPDATE tbl_ayar SET BiletSablon = REPLACE (BiletSablon, 'Ã¶', 'ö' ) WHERE BiletSablon LIKE '%Ã¶%';
+UPDATE tbl_ayar SET BiletSablon = REPLACE (BiletSablon, 'Ã¼', 'ü' ) WHERE BiletSablon LIKE '%Ã¼%';
+UPDATE tbl_ayar SET BiletSablon = REPLACE (BiletSablon, 'ÄŸ', 'ğ' ) WHERE BiletSablon LIKE '%ÄŸ%';
+UPDATE tbl_ayar SET BiletSablon = REPLACE (BiletSablon, 'Ä±', 'ı' ) WHERE BiletSablon LIKE '%Ä±%';
+UPDATE tbl_ayar SET BiletSablon = REPLACE (BiletSablon, 'Ä°', 'İ' ) WHERE BiletSablon LIKE '%Ä°%';
+UPDATE tbl_ayar SET BiletSablon = REPLACE (BiletSablon, 'Ãœ', 'Ü' ) WHERE BiletSablon LIKE '%Ãœ%';
+UPDATE tbl_ayar SET BiletSablon = REPLACE (BiletSablon, 'Ä�', 'Ğ' ) WHERE BiletSablon LIKE '%Ä�%';
+UPDATE tbl_ayar SET BiletSablon = REPLACE (BiletSablon, 'Â', '' ) WHERE BiletSablon LIKE '%Â%';
+
+UPDATE tbl_profil SET Aciklama = REPLACE (Aciklama, 'ÅŸ', 'ş' ) WHERE Aciklama LIKE '%ÅŸ%';
+UPDATE tbl_profil SET Aciklama = REPLACE (Aciklama, 'Åž', 'Ş' ) WHERE Aciklama LIKE '%Åž%';
+UPDATE tbl_profil SET Aciklama = REPLACE (Aciklama, 'Ã‡', 'Ç' ) WHERE Aciklama LIKE '%Ã‡%';
+UPDATE tbl_profil SET Aciklama = REPLACE (Aciklama, 'Ã§', 'ç' ) WHERE Aciklama LIKE '%Ã§%';
+UPDATE tbl_profil SET Aciklama = REPLACE (Aciklama, 'Ã?', 'Ö' ) WHERE Aciklama LIKE '%Ã?%';
+UPDATE tbl_profil SET Aciklama = REPLACE (Aciklama, 'Ã–', 'Ö' ) WHERE Aciklama LIKE '%Ã–%';
+UPDATE tbl_profil SET Aciklama = REPLACE (Aciklama, 'Ã¶', 'ö' ) WHERE Aciklama LIKE '%Ã¶%';
+UPDATE tbl_profil SET Aciklama = REPLACE (Aciklama, 'Ã¼', 'ü' ) WHERE Aciklama LIKE '%Ã¼%';
+UPDATE tbl_profil SET Aciklama = REPLACE (Aciklama, 'ÄŸ', 'ğ' ) WHERE Aciklama LIKE '%ÄŸ%';
+UPDATE tbl_profil SET Aciklama = REPLACE (Aciklama, 'Ä±', 'ı' ) WHERE Aciklama LIKE '%Ä±%';
+UPDATE tbl_profil SET Aciklama = REPLACE (Aciklama, 'Ä°', 'İ' ) WHERE Aciklama LIKE '%Ä°%';
+UPDATE tbl_profil SET Aciklama = REPLACE (Aciklama, 'Ãœ', 'Ü' ) WHERE Aciklama LIKE '%Ãœ%';
+UPDATE tbl_profil SET Aciklama = REPLACE (Aciklama, 'Ä�', 'Ğ' ) WHERE Aciklama LIKE '%Ä�%';
+
+UPDATE tbl_profil SET ProfilAdi = REPLACE (ProfilAdi, 'ÅŸ', 'ş' ) WHERE ProfilAdi LIKE '%ÅŸ%';
+UPDATE tbl_profil SET ProfilAdi = REPLACE (ProfilAdi, 'Åž', 'Ş' ) WHERE ProfilAdi LIKE '%Åž%';
+UPDATE tbl_profil SET ProfilAdi = REPLACE (ProfilAdi, 'Ã‡', 'Ç' ) WHERE ProfilAdi LIKE '%Ã‡%';
+UPDATE tbl_profil SET ProfilAdi = REPLACE (ProfilAdi, 'Ã§', 'ç' ) WHERE ProfilAdi LIKE '%Ã§%';
+UPDATE tbl_profil SET ProfilAdi = REPLACE (ProfilAdi, 'Ã?', 'Ö' ) WHERE ProfilAdi LIKE '%Ã?%';
+UPDATE tbl_profil SET ProfilAdi = REPLACE (ProfilAdi, 'Ã–', 'Ö' ) WHERE ProfilAdi LIKE '%Ã–%';
+UPDATE tbl_profil SET ProfilAdi = REPLACE (ProfilAdi, 'Ã¶', 'ö' ) WHERE ProfilAdi LIKE '%Ã¶%';
+UPDATE tbl_profil SET ProfilAdi = REPLACE (ProfilAdi, 'Ã¼', 'ü' ) WHERE ProfilAdi LIKE '%Ã¼%';
+UPDATE tbl_profil SET ProfilAdi = REPLACE (ProfilAdi, 'ÄŸ', 'ğ' ) WHERE ProfilAdi LIKE '%ÄŸ%';
+UPDATE tbl_profil SET ProfilAdi = REPLACE (ProfilAdi, 'Ä±', 'ı' ) WHERE ProfilAdi LIKE '%Ä±%';
+UPDATE tbl_profil SET ProfilAdi = REPLACE (ProfilAdi, 'Ä°', 'İ' ) WHERE ProfilAdi LIKE '%Ä°%';
+UPDATE tbl_profil SET ProfilAdi = REPLACE (ProfilAdi, 'Ãœ', 'Ü' ) WHERE ProfilAdi LIKE '%Ãœ%';
+UPDATE tbl_profil SET ProfilAdi = REPLACE (ProfilAdi, 'Ä�', 'Ğ' ) WHERE ProfilAdi LIKE '%Ä�%';
