@@ -36,7 +36,7 @@ fetch -o install.sh https://raw.githubusercontent.com/devbdo/demo/master/install
 
 ## Author
 
-* **Süleyman Ekici** - *Initial work* - [Victorious](https://suleymanekici.com.tr)
+* **Süleyman Ekici** - *Initial work* - [www.suleymanekici.com.tr](https://suleymanekici.com.tr)
 
 ## License
 
