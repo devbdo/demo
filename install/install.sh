@@ -38,7 +38,6 @@ BOXNET_PACKAGE_URL="https://beta.pfsense.org/packages/pfSense_master_amd64-pfSen
 # Defaults
 QH_LANG_DEFAULT="tr"
 QH_PORT_DEFAULT="81"
-QH_PORT_SSL_DEFAULT="82"
 QH_MYSQL_ROOT_PASS_DEFAULT="boxnet"
 QH_MYSQL_USER_NAME_DEFAULT="boxnet"
 QH_MYSQL_USER_PASS_DEFAULT="boxnet"
@@ -133,8 +132,6 @@ _selectLanguage() {
  _userInputs() {
     read -p "$L_QPORT [$QH_PORT_DEFAULT]: " QH_PORT
     QH_PORT="${QH_PORT:-$QH_PORT_DEFAULT}"
-    read -p "$L_QPORTSSL [$QH_PORT_SSL_DEFAULT]: " QH_PORT_SSL
-    QH_PORTSSL="${QH_PORTSSL:-$QH_PORT_SSL_DEFAULT}"
     read -p "$L_QROOTPASS [$QH_MYSQL_ROOT_PASS_DEFAULT]: " QH_MYSQL_ROOT_PASS
     QH_MYSQL_ROOT_PASS="${QH_MYSQL_ROOT_PASS:-$QH_MYSQL_ROOT_PASS_DEFAULT}"
     read -p "$L_QRADIUSUSERNAME [$QH_MYSQL_USER_NAME_DEFAULT]: " QH_MYSQL_USER_NAME
@@ -326,7 +323,6 @@ _nginxSettings() {
         echo 'boxnet_enable="YES"' >> /etc/rc.conf.local
     fi
     sed -i .bak -e "s/{QH_PORT}/$QH_PORT/g" /usr/local/boxnet/install/nginx-boxnet.conf
-    sed -i .bak -e "s/{QH_PORTSSL}/$QH_PORTSSL/g" /usr/local/boxnet/install/nginx-boxnet.conf
     echo ${L_OK} 1>&3
 }
 
