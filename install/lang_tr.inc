@@ -1,5 +1,5 @@
 ﻿#!/usr/bin/env sh
-L_WELCOME="BOXNET kurulumuna hosgeldiniz\nDeveloper Suleyman Ekici\n\nIptal etmek icin Ctrl+C yapin.\n"
+L_WELCOME="BOXNET kurulumuna hosgeldiniz\nDeveloper Suleyman Ekici\nIptal etmek icin Ctrl+C yapin.\n"
 L_QPORT="BOXNET Web panel portu"
 L_QPORTSSL="BOXNET SSL Web  panel portu"
 L_QROOTPASS="BOXNET MySQL root sifresi"
