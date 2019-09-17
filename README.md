@@ -17,21 +17,21 @@ fetch -o install.sh https://raw.githubusercontent.com/devbdo/demo/master/install
 
 
 ## Roadmap
-* Install MySQL 5.6~
-* Install PHP MySQL Extensions~
-* Install freeRADIUS3 package~
-* Install Squid package~
-* Install SquidGuard package~
-* Install OpenVpn package~
-* Install lightsquid package~
-* Install cron package~
-* freeRADIUS3 CA & certificate create~
-* freeRADIUS3 settings~
-* freeRADIUS3 EAP settings~
-* freeRADIUS3 test user create~
-* freeRADIUS3 mysql test user create~
-* boxnet CaptivePortal settings~
-* Logging & Signing of the law of the Republic of Turkey No.5651
+* Install MySQL 5.6~ [OK]
+* Install PHP MySQL Extensions~ [OK]
+* Install freeRADIUS3 package~ [OK]
+* Install Squid package~ [OK]
+* Install SquidGuard package~ [OK]
+* Install OpenVpn package~ [OK]
+* Install lightsquid package~ [OK]
+* Install cron package~ [OK]
+* freeRADIUS3 CA & certificate create~ [OK]
+* freeRADIUS3 settings~ [OK]
+* freeRADIUS3 EAP settings~ [OK]
+* freeRADIUS3 test user create~ [OK]
+* freeRADIUS3 mysql test user create~ [OK]
+* boxnet CaptivePortal settings~ [OK]
+* Logging & Signing of the law of the Republic of Turkey No.5651~ [OK]
 
 
 ## Author
