@@ -1,6 +1,7 @@
 ﻿#!/usr/bin/env sh
-L_WELCOME="BOXNET kurulumuna hosgeldiniz\nBOXNET tercihen temiz kurulmus, daha onceden hotspot kurulumu yapilmamis boxnet 2.4.4 surumu ve uzerinde test edilmistir.\nBu isleme baslamadan once sisteminizin yedegini almayi unutmayin !!\nSisteminize gelebilecek zararlardan hic bir sekilde meshul degiliz.\nKurulum ile ilgili kayitlar ${OUTPUTLOG} dosyasina yazilacaktir.\ncat ${OUTPUTLOG} |more\nkomutu ile kurulum detaylarini inceleyebilirsiniz.\n\nIptal etmek icin Ctrl+C yapin.\n"
+L_WELCOME="BOXNET kurulumuna hosgeldiniz\nDeveloper Suleyman Ekici\n\nIptal etmek icin Ctrl+C yapin.\n"
 L_QPORT="BOXNET Web panel portu"
+L_QPORTSSL="BOXNET SSL Web  panel portu"
 L_QROOTPASS="BOXNET MySQL root sifresi"
 L_QRADIUSUSERNAME="BOXNET MySQL radius kullanici adi"
 L_QRADIUSPASSWORD="BOXNET MySQL radius kullanici sifresi"
