@@ -36,7 +36,7 @@ BOXNET_PACKAGE_URL="https://beta.pfsense.org/packages/pfSense_master_amd64-pfSen
 
 
 # Defaults
-QH_LANG_DEFAULT="en"
+QH_LANG_DEFAULT="tr"
 QH_PORT_DEFAULT="81"
 QH_PORT_SSL_DEFAULT="82"
 QH_MYSQL_ROOT_PASS_DEFAULT="boxnet"
@@ -116,7 +116,7 @@ fi
 }
 
 _selectLanguage() {
-    read -p "Boxnet Kurulumunu Yapmak istiyor musunuz ? (Enter) [$QH_LANG_DEFAULT]: " QH_LANG
+    read -p "Boxnet Kurulum Baslatmak icin Enter Basin [$QH_LANG_DEFAULT]: " QH_LANG
     QH_LANG="${QH_LANG:-$QH_LANG_DEFAULT}"
     case "${QH_LANG}" in
             [eE][nN])
