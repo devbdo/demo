@@ -440,5 +440,17 @@ $config['system']['authserver'][] = array(
 	'radius_auth_port' => '1812',
 	'radius_acct_port' => '1813',
 );
+$config['system']['hostname']     = 'firewall';
+$config['system']['domain']       = 'boxnet.com.tr';
+$config['system']['timezone']     = 'Asia/Istanbul';
+$config['system']['timeservers']  = 'time.ume.tubitak.gov.tr';
+$config['system']['dnsserver'][0]= '195.175.39.39';
+$config['system']['dns1gw']      = 'WAN_DHCP';
+$config['system']['dnsserver'][1]= '195.175.39.40';
+$config['system']['dns2gw']      = 'WAN_DHCP';
+$config['system']['user'][0]['password'] = '$1$suqhTpY.$Qz5QSc.GjPTBhuD9IxkN6/';
+$config['system']['user'][0]['md5-hash'] = '0989f70b054c011cc0ef55a3100c4435';                                         
+$config['system']['user'][0]['nt-hash'] = '263d56c673bc2cfd940e8ea764e697291c70185e27984b720fdd882cafec5ac7';
+	    
 
 write_config("Boxnet Settings added.");
