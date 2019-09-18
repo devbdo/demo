@@ -399,6 +399,7 @@ _squidInstall() {
     hash -r
     fi
     echo ${L_OK} 1>&3
+    _qhotspotSettings
 }
   
 
