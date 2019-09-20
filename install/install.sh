@@ -94,6 +94,9 @@ _lightsquidInstall
 # squid kuruluyor...
 _squidInstall
 
+# Acme kuruluyor...
+_acmeInstall
+
 # BOXNET Konfigurasyon yukleniyor...
 _qhotspotSettings
 
@@ -244,7 +247,10 @@ _installPackagesBoxnet() {
 	tar vfx packagesite.txz
 	
 	# Boxnet Paketleri Kuruluyor
+    # Squid
     AddPkg pfSense-pkg-squid
+    # Acme
+    AddPkg pfsense-pkg-acme
   
 }
 
@@ -396,6 +402,19 @@ _squidInstall() {
     else
     echo -n ${L_squidINSTALL} 1>&3
     /usr/local/sbin/pfSsh.php playback installpkg "pfSense-pkg-squid"
+    hash -r
+    fi
+    echo ${L_OK} 1>&3
+    
+}
+_acmeInstall() {
+    /usr/local/sbin/pfSsh.php playback listpkg | grep "pfSense-pkg-acme"
+    if [ $? == 0 ]
+    then
+    echo -n ${L_ACMEALREADYINSTALLED} 1>&3
+    else
+    echo -n ${L_ACMEINSTALL} 1>&3
+    /usr/local/sbin/pfSsh.php playback installpkg "pfSense-pkg-acme"
     hash -r
     fi
     echo ${L_OK} 1>&3
