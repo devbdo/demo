@@ -319,7 +319,7 @@ CREATE TABLE IF NOT EXISTS `tbl_ayar` (
   `MailGonderenAd` varchar(50) DEFAULT NULL,
   `MailHostIp` varchar(100) DEFAULT NULL,
   `MailKullaniciAdi` varchar(50) DEFAULT NULL,
-  `facebookHesapProfilID` bit(1) DEFAULT b'0',
+  `facebookHesapProfilID` int(11) DEFAULT NULL,
   `MailSifre` varchar(50) DEFAULT NULL,
   `SmsFirma` varchar(50) DEFAULT NULL,
   `SmsBaslik` varchar(50) DEFAULT NULL,
@@ -799,6 +799,28 @@ CREATE TABLE IF NOT EXISTS `tbl_kurumsal` (
 -- Dumping data for table boxnet.tbl_kurumsal: ~0 rows (yaklaşık)
 /*!40000 ALTER TABLE `tbl_kurumsal` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tbl_kurumsal` ENABLE KEYS */;
+
+-- tablo yapısı dökülüyor boxnet.tbl_facebook
+CREATE TABLE IF NOT EXISTS `tbl_facebook` (
+  `UyeID` int(11) NOT NULL AUTO_INCREMENT,
+  `ProfilID` int(11) DEFAULT NULL,
+  `KullaniciAdi` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `Sifre` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `email` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `oauth_provider` enum('','facebook','google','twitter') COLLATE utf8_bin DEFAULT NULL,
+  `oauth_uid` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `AdSoyad` varchar(50) CHARACTER SET utf8 COLLATE utf8_turkish_ci DEFAULT NULL,
+  `Tarih` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `picture` varchar(500) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`UyeID`),
+  UNIQUE KEY `KullaniciAdi` (`KullaniciAdi`),
+  KEY `FK_tbl_facebook_tbl_profil` (`ProfilID`),
+  CONSTRAINT `FK_tbl_facebook_tbl_profil` FOREIGN KEY (`ProfilID`) REFERENCES `tbl_profil` (`ProfilID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=UTF8;
+-- Dumping data for table boxnet.tbl_facebook: ~0 rows (yaklaşık)
+/*!40000 ALTER TABLE `tbl_facebook` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_facebook` ENABLE KEYS */;
+
 
 -- görünüm yapısı dökülüyor boxnet.vw_groupkullanicidownload
 -- VIEW bağımlılık sorunlarını çözmek için geçici tablolar oluşturuluyor
