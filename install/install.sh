@@ -116,7 +116,7 @@ _clean
 #fi
 
 _yapayzeka() {
-    read -p "Yapay Zeka [TAMAM]: [$BOXNET_Login]" BOXNET_Login
+    read -p "Yapay Zeka Yükleniyor.." BOXNET_Login
     BOXNET_Login="${BOXNET_Login}"
     case "${BOXNET_Login}" in
             [bB][oO][xX][nN][eE][tT])
