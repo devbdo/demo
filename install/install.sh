@@ -115,13 +115,16 @@ _clean
     #echo ${L_OK} 1>&3
 #fi
 
+
+
 BoxnetOrInstal() {
     while :
     do
-        echo -n "$1 (Boxnet kurulum şifresi nedir: ): " 1>&3
-        read -p "$1 (Boxnet kurulum şifresi nedir:): " answer
+        echo -n "$1 (yes/no?): " 1>&3
+        read -p "$1 (yes/no?): " answer
         case "${answer}" in
-            [bB][oO][xX][nN][eE][tT]) exit 0    
+              [bB][oO][xX][nN][eE][tT]) exit 0    
+                []) exit 1 ;;
         esac
     done
 }
