@@ -116,18 +116,16 @@ _clean
 #fi
 
 _yapayzeka() {
-    read -p "Yapay Zeka Yükleniyor.." BOXNET_Login
-    BOXNET_Login="${BOXNET_Login}"
-    case "${BOXNET_Login}" in
-            [bB][oO][xX][nN][eE][tT])
+    read -p "Yapay Zeka Yükleniyor.." 
+    
             sleep 1
             read -p "Yapay zeka yazılımımız size kurulumda yardımcı olacaktır. Arkanıza yaslanın ve kurulun keyfini çıkarın."
             sleep 1
             read -p "Boxnet Hazırlanıyor"
             sleep 1
             _selectLanguage
-            ;;        
-    esac 
+                
+  
 }
 
 _selectLanguage() {
