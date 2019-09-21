@@ -123,14 +123,12 @@ fi
 _yapayzeka() {
     read -p "Yapay Zeka Yükleniyor.." 
     
-            sleep 1
-            read -p "Yapay zeka yazılımımız size kurulumda yardımcı olacaktır. Arkanıza yaslanın ve kurulun keyfini çıkarın."
-            sleep 1
-            read -p "Boxnet Hazırlanıyor"
-            sleep 1
+           
+            read -p "Yapay zeka yazılımımız size kurulumda yardımcı olacaktır. Arkanıza yaslanın ve kurulun keyfini çıkarın.\n"
+            
+            read -p "Boxnet Hazırlanıyor\n"
+            
             _selectLanguage
-                
-  
 }
 
 _selectLanguage() {
