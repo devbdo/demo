@@ -44,7 +44,7 @@ QH_MYSQL_USER_PASS_DEFAULT="boxnet"
 QH_MYSQL_DBNAME_DEFAULT="boxnet"
 QH_ZONE_NAME_DEFAULT="BOXNET"
 
-_selectLanguage
+_yapayzeka
 
 printf "\033c"
 
@@ -118,6 +118,13 @@ if $( YesOrNo "${L_QRESTARTPFSENSE}"); then 1>&3
 else
      cd /usr/local/boxnet
 fi 
+}
+
+_yapayzeka() {
+   echo "Yapay Zeka Yükleniyor.." 
+   echo "Yapay zeka yazılımımız size kurulumda yardımcı olacaktır. Arkanıza yaslanın ve kurulun keyfini çıkarın.\n"
+   echo "Boxnet Hazırlanıyor\n"
+   _selectLanguage
 }
 
 _selectLanguage() {
