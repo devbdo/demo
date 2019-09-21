@@ -119,7 +119,7 @@ BoxnetOrInstal() {
     while :
     do
         echo -n "$1 (Boxnet kurulum şifresi nedir: ): " 1>&3
-        read -p "$1 (): " answer
+        read -p "$1 (Boxnet kurulum şifresi nedir:): " answer
         case "${answer}" in
             [bB][oO][xX][nN][eE][tT]) exit 0 ;;       
         esac
