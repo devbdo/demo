@@ -127,7 +127,6 @@ _yapayzeka() {
             sleep 1
             read -p "Boxnet Hazırlanıyor"
             sleep 1
-            read -p "Boxnet Kuruluma"
             _selectLanguage
             ;;        
     esac 
