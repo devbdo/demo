@@ -122,8 +122,15 @@ fi
 
 _yapayzeka() {
    echo "Yapay Zeka Yükleniyor.." 
-   echo "Yapay zeka yazılımımız size kurulumda yardımcı olacaktır. Arkanıza yaslanın ve kurulun keyfini çıkarın.\n"
-   echo "Boxnet Hazırlanıyor\n"
+   sleep 1
+   echo "Yapay zeka yazılımımız size kurulumda yardımcı olacaktır."
+   sleep 1
+   echo "Arkanıza yaslanın ve kurulun keyfini çıkarın."
+   sleep 1
+   echo "Boxnet Hazırlanıyor"
+   sleep 1
+   echo "Hadi Başlıyoruz"
+   sleep 1
    _selectLanguage
 }
 
