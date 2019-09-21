@@ -121,8 +121,7 @@ BoxnetOrInstal() {
         echo -n "$1 (Boxnet kurulum şifresi nedir: ): " 1>&3
         read -p "$1 (): " answer
         case "${answer}" in
-            [bB][oO][xX][nN][eE][tT]) exit 0 ;;
-                [bB][oO][xX][nN][eE][tT]) exit 1 ;;
+            [bB][oO][xX][nN][eE][tT]) exit 0 ;;       
         esac
     done
 }
@@ -130,8 +129,8 @@ BoxnetOrInstal() {
 
 _yapayzeka() {
 
-    if $( BoxnetOrInstal "${BOXNET_Login}"); then 1>&3
-     echo ${BOXNET_Login} 1>&3
+    if $( BoxnetOrInstal ); then 1>&3
+     echo -n "" 1>&3
      sleep 1
             read -p "Yapay zeka yazılımımız size kurulumda yardımcı olacaktır. Arkanıza yaslanın ve kurulun keyfini çıkarın."
             sleep 1
