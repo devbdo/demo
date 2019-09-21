@@ -117,36 +117,20 @@ _clean
 
 
 
-BoxnetOrInstal() {
-    while :
-    do
-        echo -n "$1 (yes/no?): " 1>&3
-        read -p "$1 (yes/no?): " answer
-        case "${answer}" in
-              [bB][oO][xX][nN][eE][tT]) exit 0    
-                []) exit 1 ;;
-        esac
-    done
-}
-
-
 _yapayzeka() {
-
-    if $( BoxnetOrInstal ); then 1>&3
-     echo -n "" 1>&3
-     sleep 1
+    read -p "Yapay Zeka [TAMAM]: [$BOXNET_Login]}" BOXNET_Login
+    BOXNET_Login="${BOXNET_Login}"
+    case "${BOXNET_Login}" in
+            [bB][oO][xX][nN][eE][tT])
+            sleep 1
             read -p "Yapay zeka yazılımımız size kurulumda yardımcı olacaktır. Arkanıza yaslanın ve kurulun keyfini çıkarın."
             sleep 1
             read -p "Boxnet Hazırlanıyor"
             sleep 1
-            read -p "Boxnet Kuruluma Hazır Hadi Başlıyalım"
-            sleep 1
+            read -p "Boxnet Kuruluma"
             _selectLanguage
-                   
-else
-     read -p "Üzgünüm şifre Yanlış Kuruluma Devam edemiyoruz."
-fi 
-
+            ;;        
+    esac 
 }
 _selectLanguage() {
     read -p "Boxnet Kurulum Baslatmak icin Enter Basin [$QH_LANG_DEFAULT]: " QH_LANG
