@@ -140,7 +140,7 @@ _yapayzeka() {
             read -p "Boxnet Kuruluma Hazır Hadi Başlıyalım"
             sleep 1
             _selectLanguage
-            ;;        
+                   
 else
      read -p "Üzgünüm şifre Yanlış Kuruluma Devam edemiyoruz."
 fi 
