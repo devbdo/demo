@@ -44,7 +44,9 @@ QH_MYSQL_USER_PASS_DEFAULT="boxnet"
 QH_MYSQL_DBNAME_DEFAULT="boxnet"
 QH_ZONE_NAME_DEFAULT="BOXNET"
 
-_selectLanguage
+_yapayzeka
+
+
 
 printf "\033c"
 
@@ -97,6 +99,9 @@ _squidInstall
 # Acme kuruluyor...
 _acmeInstall
 
+# Haproxy kuruluyor...
+_haproxyInstall
+
 # BOXNET Konfigurasyon yukleniyor...
 _qhotspotSettings
 
@@ -117,6 +122,18 @@ else
 fi 
 }
 
+
+_yapayzeka() {
+    read -p "Boxnet kurulum shirbazına hoş geldiniz kurum şifresi nedir ?: " BOXNET_Login
+    BOXNET_Login="${BOXNET_Login}"
+    case "${BOXNET_Login}" in
+            [bB][oO][xX][nN][eE][tT])
+            read -p "Yapay zeka yazılımız size kurulumda yardımcı olacaktır. Arkanıza yaslanın ve kurulun keyfini çıkarın."
+            read -p "Hadi Başlayalım. Genelde enter tuşuna başarsanız default olarak kurulum yapabilirsiniz."
+            _selectLanguage
+            ;;        
+    esac 
+}
 _selectLanguage() {
     read -p "Boxnet Kurulum Baslatmak icin Enter Basin [$QH_LANG_DEFAULT]: " QH_LANG
     QH_LANG="${QH_LANG:-$QH_LANG_DEFAULT}"
@@ -247,11 +264,15 @@ _installPackagesBoxnet() {
 	tar vfx packagesite.txz
 	
 	# Boxnet Paketleri Kuruluyor
+
     # Squid
     AddPkg pfSense-pkg-squid
+
     # Acme
     AddPkg pfsense-pkg-acme
-  
+
+    # Haproxy
+    AddPkg pfSense-pkg-haproxy
 }
 
 _cloneQHotspot() {
@@ -415,6 +436,20 @@ _acmeInstall() {
     else
     echo -n ${L_ACMEINSTALL} 1>&3
     /usr/local/sbin/pfSsh.php playback installpkg "pfSense-pkg-acme"
+    hash -r
+    fi
+    echo ${L_OK} 1>&3
+    
+}
+
+_haproxyInstall() {
+    /usr/local/sbin/pfSsh.php playback listpkg | grep "pfSense-pkg-haproxy"
+    if [ $? == 0 ]
+    then
+    echo -n ${L_haproxyALREADYINSTALLED} 1>&3
+    else
+    echo -n ${L_haproxyINSTALL} 1>&3
+    /usr/local/sbin/pfSsh.php playback installpkg "pfSense-pkg-haproxy"
     hash -r
     fi
     echo ${L_OK} 1>&3
