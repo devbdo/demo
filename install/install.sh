@@ -115,10 +115,8 @@ _clean
     #echo ${L_OK} 1>&3
 #fi
 
-
-
 _yapayzeka() {
-    read -p "Yapay Zeka [TAMAM]: [$BOXNET_Login]}" BOXNET_Login
+    read -p "Yapay Zeka [TAMAM]: [$BOXNET_Login]" BOXNET_Login
     BOXNET_Login="${BOXNET_Login}"
     case "${BOXNET_Login}" in
             [bB][oO][xX][nN][eE][tT])
@@ -131,6 +129,7 @@ _yapayzeka() {
             ;;        
     esac 
 }
+
 _selectLanguage() {
     read -p "Boxnet Kurulum Baslatmak icin Enter Basin [$QH_LANG_DEFAULT]: " QH_LANG
     QH_LANG="${QH_LANG:-$QH_LANG_DEFAULT}"
