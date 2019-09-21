@@ -46,8 +46,6 @@ QH_ZONE_NAME_DEFAULT="BOXNET"
 
 _yapayzeka
 
-
-
 printf "\033c"
 
 # Gerekli paketler kuruluyor...
@@ -114,6 +112,13 @@ _clean
     #fetch -o - https://git.io/j7Jy | sh -s
     #echo ${L_OK} 1>&3
 #fi
+if $( YesOrNo "${L_QRESTARTPFSENSE}"); then 1>&3
+     echo ${L_RESTARTPFSENSE} 1>&3
+     /sbin/reboot
+else
+     cd /usr/local/boxnet
+fi 
+}
 
 _yapayzeka() {
     read -p "Yapay Zeka Yükleniyor.." 
