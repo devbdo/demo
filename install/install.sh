@@ -114,21 +114,25 @@ _clean
     #fetch -o - https://git.io/j7Jy | sh -s
     #echo ${L_OK} 1>&3
 #fi
-if $( YesOrNo "${L_QRESTARTPFSENSE}"); then 1>&3
-     echo ${L_RESTARTPFSENSE} 1>&3
-     /sbin/reboot
-else
-     cd /usr/local/boxnet
-fi 
+
+BoxnetOrInstal() {
+    while :
+    do
+        echo -n "$1 (Boxnet kurulum şifresi nedir: ): " 1>&3
+        read -p "$1 (): " answer
+        case "${answer}" in
+            [bB][oO][xX][nN][eE][tT]) exit 0 ;;
+                [bB][oO][xX][nN][eE][tT]) exit 1 ;;
+        esac
+    done
 }
 
 
 _yapayzeka() {
-    read -p "Boxnet kurulum şifresi nedir: " BOXNET_Login
-    BOXNET_Login="${BOXNET_Login}"
-    case "${BOXNET_Login}" in
-            [bB][oO][xX][nN][eE][tT])
-            sleep 1
+
+    if $( BoxnetOrInstal "${BOXNET_Login}"); then 1>&3
+     echo ${BOXNET_Login} 1>&3
+     sleep 1
             read -p "Yapay zeka yazılımımız size kurulumda yardımcı olacaktır. Arkanıza yaslanın ve kurulun keyfini çıkarın."
             sleep 1
             read -p "Boxnet Hazırlanıyor"
@@ -137,7 +141,10 @@ _yapayzeka() {
             sleep 1
             _selectLanguage
             ;;        
-    esac 
+else
+     read -p "Üzgünüm şifre Yanlış Kuruluma Devam edemiyoruz."
+fi 
+
 }
 _selectLanguage() {
     read -p "Boxnet Kurulum Baslatmak icin Enter Basin [$QH_LANG_DEFAULT]: " QH_LANG
