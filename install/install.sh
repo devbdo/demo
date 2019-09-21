@@ -124,12 +124,17 @@ fi
 
 
 _yapayzeka() {
-    read -p "Boxnet kurulum shirbazına hoş geldiniz kurum şifresi nedir ?: " BOXNET_Login
+    read -p "Boxnet kurulum şifresi nedir: " BOXNET_Login
     BOXNET_Login="${BOXNET_Login}"
     case "${BOXNET_Login}" in
             [bB][oO][xX][nN][eE][tT])
-            read -p "Yapay zeka yazılımız size kurulumda yardımcı olacaktır. Arkanıza yaslanın ve kurulun keyfini çıkarın."
-            read -p "Hadi Başlayalım. Genelde enter tuşuna başarsanız default olarak kurulum yapabilirsiniz."
+            sleep 1
+            read -p "Yapay zeka yazılımımız size kurulumda yardımcı olacaktır. Arkanıza yaslanın ve kurulun keyfini çıkarın."
+            sleep 1
+            read -p "Boxnet Hazırlanıyor"
+            sleep 1
+            read -p "Boxnet Kuruluma Hazır Hadi Başlıyalım"
+            sleep 1
             _selectLanguage
             ;;        
     esac 
