@@ -121,21 +121,21 @@ fi
 }
 
 _yapayzeka() {
-   echo "Yapay Zeka Yükleniyor.." 
+   echo "Yapay Zeka Yükleniyor..." 
    sleep 1
-   echo "Yapay zeka yazılımımız size kurulumda yardımcı olacaktır."
+   echo "Yapay zeka yazılımımız size kurulumda yardımcı olacaktır..."
    sleep 1
-   echo "Arkanıza yaslanın ve kurulun keyfini çıkarın."
+   echo "Arkanıza yaslanın ve kurulun keyfini çıkarın..."
    sleep 1
-   echo "Boxnet Hazırlanıyor"
+   echo "Boxnet Hazırlanıyor..."
    sleep 1
-   echo "Hadi Başlıyoruz"
+   echo "Merhaba ben Yapay Zeka asistanıyım size kurulum aşamasında yardımcı olacağım."
    sleep 1
    _selectLanguage
 }
 
 _selectLanguage() {
-    read -p "Boxnet Kurulum Baslatmak icin Enter Basin [$QH_LANG_DEFAULT]: " QH_LANG
+    read -p "Boxnet Kurulum Baslatmak icin Enter tuşuna basın: " QH_LANG
     QH_LANG="${QH_LANG:-$QH_LANG_DEFAULT}"
     case "${QH_LANG}" in
             [eE][nN])
