@@ -20,7 +20,7 @@ if (!array_search("/usr/local/bin/boxnet_check.sh", array_column($config['cron']
         "month" => "*",
         "wday" => "*",
         "who" => "root",
-        "command" => "/usr/local/bin/php /usr/local/boxnet/public/Runtime/netGrupCheck.php"
+        "command" => "/usr/local/bin/php /usr/local/www/boxplus/Runtime/netGrupCheck.php"
     );
 
     $config['cron']['item'][] = array(
@@ -30,7 +30,7 @@ if (!array_search("/usr/local/bin/boxnet_check.sh", array_column($config['cron']
         "month" => "*",
         "wday" => "*",
         "who" => "root",
-        "command" => "/usr/local/bin/php /usr/local/boxnet/public/Runtime/netCheck.php"
+        "command" => "/usr/local/bin/php /usr/local/www/boxplus/Runtime/netCheck.php"
     );
 
     $config['cron']['item'][] = array(
@@ -40,7 +40,7 @@ if (!array_search("/usr/local/bin/boxnet_check.sh", array_column($config['cron']
         "month" => "*",
         "wday" => "*",
         "who" => "root",
-        "command" => "/usr/local/bin/php /usr/local/boxnet/public/Runtime/Entegre.php"
+        "command" => "/usr/local/bin/php /usr/local/www/boxplus/Runtime/Entegre.php"
     );
     $config['cron']['item'][] = array(
         "minute" => "59",
