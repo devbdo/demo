@@ -102,8 +102,6 @@ CREATE TABLE IF NOT EXISTS `radacct` (
 
 -- Dumping data for table net_yonetim.radacct: ~0 rows (yaklaşık)
 /*!40000 ALTER TABLE `radacct` DISABLE KEYS */;
-INSERT INTO `radacct` (`radacctid`, `acctsessionid`, `acctuniqueid`, `username`, `groupname`, `realm`, `nasipaddress`, `nasportid`, `nasporttype`, `acctstarttime`, `acctstoptime`, `acctsessiontime`, `acctauthentic`, `connectinfo_start`, `connectinfo_stop`, `acctinputoctets`, `acctoutputoctets`, `calledstationid`, `callingstationid`, `acctterminatecause`, `servicetype`, `framedprotocol`, `framedipaddress`, `acctstartdelay`, `acctstopdelay`, `xascendsessionsvrkey`) VALUES
-	(4, 'e2f9d84bd2e66ee6', 'cc0f437f9c60da42', 'demo', '', '', '172.16.10.1', '2140', 'Ethernet', '2015-07-04 19:04:45', '2015-07-04 19:05:19', 34, 'RADIUS', '', '', 0, 0, '172.16.10.1', '00:30:67:37:45:10', 'User-Request', '', '', '172.16.10.10', 0, 0, '');
 /*!40000 ALTER TABLE `radacct` ENABLE KEYS */;
 
 -- tablo yapısı dökülüyor boxnet.radcheck
