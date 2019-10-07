@@ -417,9 +417,9 @@ CREATE TABLE IF NOT EXISTS `tbl_kullanici` (
 
 -- Dumping data for table boxnet.tbl_kullanici: ~2 rows (yaklaşık)
 /*!40000 ALTER TABLE `tbl_kullanici` DISABLE KEYS */;
-INSERT INTO `tbl_kullanici` (`KullaniciID`, `AdSoyad`, `Telefon`, `Mail`, `KullaniciAdi`, `Sifre`, `Tarih`) VALUES
-	(6, 'Boxnet Administrator', '0 216 970 06 44', 'info@simyacibilisim.com', 'admin', 'BOXnet2014smyc'),
-	(7, 'Boxnet Standart', '0 216 970 06 44', 'info@simyacibilisim.com', 'boxnet', 'B0xn3t', '2014-10-17 01:09:05');
+INSERT INTO `tbl_kullanici` (`KullaniciID`, `AdSoyad`, `Telefon`, `Mail`, `KullaniciAdi`, `Sifre`, `Tarih`,  `avatar`) VALUES
+	(6, 'Boxnet Administrator', '0 216 970 06 44', 'info@simyacibilisim.com', 'admin', 'BOXnet2014smyc', null, null),
+	(7, 'Boxnet Standart', '0 216 970 06 44', 'info@simyacibilisim.com', 'boxnet', 'B0xn3t', '2014-10-17 01:09:05', null);
 /*!40000 ALTER TABLE `tbl_kullanici` ENABLE KEYS */;
 
 -- tablo yapısı dökülüyor boxnet.tbl_macban
