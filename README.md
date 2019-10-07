@@ -33,6 +33,10 @@ fetch -o install.sh https://raw.githubusercontent.com/devbdo/demo/master/install
 * freeRADIUS3 mysql test user create~ [OK]
 * boxnet CaptivePortal settings~ [OK]
 * Logging & Signing of the law of the Republic of Turkey No.5651~ [OK]
+* Install ACME package~ [OK]
+* Install HaProxy package~ [OK]
+* Install OpenVpn Export Client package~ [OK]
+
 
 
 ## Author
