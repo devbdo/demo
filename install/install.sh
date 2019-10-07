@@ -100,6 +100,9 @@ _acmeInstall
 # Haproxy kuruluyor...
 _haproxyInstall
 
+# Open VPN EXPORT CLIENT kuruluyor...
+_openvpnInstall
+
 # BOXNET Konfigurasyon yukleniyor...
 _qhotspotSettings
 
@@ -275,7 +278,7 @@ _installPackagesBoxnet() {
     AddPkg pfSense-pkg-haproxy
 
     # Open Vpn Client Export
-    AddPkg openvpn-client-export
+    AddPkg pfSense-pkg-openvpn-client-export
 }
 
 _cloneQHotspot() {
@@ -460,13 +463,13 @@ _haproxyInstall() {
 }
 
 _openvpnInstall() {
-    /usr/local/sbin/pfSsh.php playback listpkg | grep "openvpn-client-export"
+    /usr/local/sbin/pfSsh.php playback listpkg | grep "pfSense-pkg-openvpn-client-export"
     if [ $? == 0 ]
     then
     echo -n ${L_oceALREADYINSTALLED} 1>&3
     else
     echo -n ${L_oceINSTALL} 1>&3
-    /usr/local/sbin/pfSsh.php playback installpkg "openvpn-client-export"
+    /usr/local/sbin/pfSsh.php playback installpkg "pfSense-pkg-openvpn-client-export"
     hash -r
     fi
     echo ${L_OK} 1>&3
