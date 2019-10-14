@@ -107,7 +107,7 @@ _openvpnInstall
 _ShellcmdInstall
 
 # BOXNET Konfigurasyon yukleniyor...
-_qhotspotSettings
+_boxnetSettings
 
 # Temizlik
 _clean
@@ -496,14 +496,14 @@ _ShellcmdInstall() {
 }
 
 
-_qhotspotSettings() {
-    echo -n ${L_QHOTSPOTSETTINGS} 1>&3
-    cp /usr/local/boxnet/install/qhotspotconfig.php /etc/phpshellsessions/qhotspotconfig
-    sed -i .bak -e "s/{QH_MYSQL_USER_NAME}/$QH_MYSQL_USER_NAME/g" /etc/phpshellsessions/qhotspotconfig
-    sed -i .bak -e "s/{QH_MYSQL_USER_PASS}/$QH_MYSQL_USER_PASS/g" /etc/phpshellsessions/qhotspotconfig
-    sed -i .bak -e "s/{QH_MYSQL_DBNAME}/$QH_MYSQL_DBNAME/g" /etc/phpshellsessions/qhotspotconfig
-    sed -i .bak -e "s/{QH_ZONE_NAME}/$QH_ZONE_NAME/g" /etc/phpshellsessions/qhotspotconfig
-    /usr/local/sbin/pfSsh.php playback qhotspotconfig
+_boxnetSettings() {
+    echo -n ${L_BOXNETSETTINGS} 1>&3
+    cp /usr/local/boxnet/install/boxnetconfig.php /etc/phpshellsessions/boxnetconfig
+    sed -i .bak -e "s/{QH_MYSQL_USER_NAME}/$QH_MYSQL_USER_NAME/g" /etc/phpshellsessions/boxnetconfig
+    sed -i .bak -e "s/{QH_MYSQL_USER_PASS}/$QH_MYSQL_USER_PASS/g" /etc/phpshellsessions/boxnetconfig
+    sed -i .bak -e "s/{QH_MYSQL_DBNAME}/$QH_MYSQL_DBNAME/g" /etc/phpshellsessions/boxnetconfig
+    sed -i .bak -e "s/{QH_ZONE_NAME}/$QH_ZONE_NAME/g" /etc/phpshellsessions/boxnetconfig
+    /usr/local/sbin/pfSsh.php playback boxnetconfig
     echo ${L_OK} 1>&3
 }
 
@@ -512,7 +512,7 @@ _clean() {
     rm -rf /usr/local/boxnet/install/client.cnf*
     rm -rf /usr/local/boxnet/install/boxnet.sql*
     rm -rf /usr/local/boxnet/install/boxnet.sh*
-    rm -rf /usr/local/boxnet/install/qhotspotconfig.php
+    rm -rf /usr/local/boxnet/install/boxnetconfig.php
 }
 
 YesOrNo() {
