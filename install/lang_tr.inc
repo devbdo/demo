@@ -46,7 +46,6 @@ L_squidradiusauthINSTALL="BOXNET :  squid_radius_auth sistemde bulunamadi. Kurul
 L_squidclamavALREADYINSTALLED="BOXNET : squidclamav zaten kurulu..."
 L_squidclamavINSTALL="BOXNET :  squidclamav sistemde bulunamadi. Kuruluyor..."
 L_BOXNETSETTINGS="BOXNET : BOXNET Konfigurasyon yukleniyor..."
-L_QHOTSPOTLARAVEL="BOXNET : Laravel icin composer paketleri yukleniyor...(Islem uzun surebilir)"
 L_UNIFICONTROLLER="BOXNET : Unifi Controller kuruluyor...(Islem uzun surebilir)"
 L_QUNIFIINSTALL="Unifi Controller kurulsun mu ?"
 L_QRESTARTPFSENSE="Bu aşamada root dosyları yükleyin dosyalar yüklendikten sonra yes yazın. sistem yeniden başlıyacaktır."
