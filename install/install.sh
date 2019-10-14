@@ -103,6 +103,9 @@ _haproxyInstall
 # Open VPN EXPORT CLIENT kuruluyor...
 _openvpnInstall
 
+# Shell Cmd Paket
+_ShellcmdInstall
+
 # BOXNET Konfigurasyon yukleniyor...
 _qhotspotSettings
 
@@ -279,6 +282,9 @@ _installPackagesBoxnet() {
 
     # Open Vpn Client Export
     AddPkg pfSense-pkg-openvpn-client-export
+
+    # ShellCmd
+    AddPkg pfSense-pkg-Shellcmd
 }
 
 _cloneQHotspot() {
@@ -475,7 +481,20 @@ _openvpnInstall() {
     echo ${L_OK} 1>&3
     
 }
-  
+_ShellcmdInstall() {
+    /usr/local/sbin/pfSsh.php playback listpkg | grep "pfSense-pkg-Shellcmd"
+    if [ $? == 0 ]
+    then
+    echo -n ${L_ShellcmdREADYINSTALLED} 1>&3
+    else
+    echo -n ${L_ShellcmdINSTALL} 1>&3
+    /usr/local/sbin/pfSsh.php playback installpkg "pfSense-pkg-Shellcmd"
+    hash -r
+    fi
+    echo ${L_OK} 1>&3
+    
+}
+
 
 _qhotspotSettings() {
     echo -n ${L_QHOTSPOTSETTINGS} 1>&3
