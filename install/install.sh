@@ -234,14 +234,7 @@ if [ ! -f ${PWD}/restarted.qhs ]; then
     AddPkg squidGuard
     AddPkg lightsquid
 
-  
-  # pfsense yapılacak
-    fetch ${BOXNET_PACKAGE_URL}
-	tar vfx packagesite.txz
-    
 
-    AddPkg mysql57-client
-	AddPkg mysql57-server
 	
     ARCH=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
     if [ ${ARCH} == "amd64" ]
