@@ -229,12 +229,11 @@ if [ ! -f ${PWD}/restarted.qhs ]; then
 	AddPkg mc
 	AddPkg lsof
 	AddPkg htop
-    AddPkg mysql57-client
-	AddPkg mysql57-server
+	AddPkg mysql56-client
+	AddPkg mysql56-server
     AddPkg squidGuard
     AddPkg lightsquid
-
-
+  
 	
     ARCH=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
     if [ ${ARCH} == "amd64" ]
